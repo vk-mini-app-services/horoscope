@@ -3,7 +3,6 @@ import { Dispatch, FC, SetStateAction, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InfoCard } from '../../../../../components/info-card';
 import { PagesEnum } from '../../../../../types/enums';
-import { ROUTE_URL } from '../../../../../utils/constants/app';
 import { useStyles } from './styles';
 
 interface ISelectPanelProps {
@@ -17,7 +16,7 @@ export const SelectPanel: FC<ISelectPanelProps> = () => {
   const handleGoPage = useCallback((event: React.SyntheticEvent<HTMLButtonElement>) => {
     const value = event.currentTarget.dataset.value;
 
-    navigate(`${ROUTE_URL === '' ? '/' : ROUTE_URL}${value}`);
+    navigate(`/${value}`);
   }, []);
 
   return (

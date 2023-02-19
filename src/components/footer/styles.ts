@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 
-export const useStyles = createStyles(() => ({
+export const useStyles = createStyles((theme) => ({
   root: {
     position: 'fixed',
     bottom: '0px',
@@ -11,7 +11,7 @@ export const useStyles = createStyles(() => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'white',
-    padding: '0 57px'
+    padding: `0 ${theme.spacing.sm}px`
   },
   button: {
     backgroundColor: 'transparent',

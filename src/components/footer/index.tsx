@@ -5,7 +5,7 @@ import { useStyles } from './styles';
 import { BookIcon, EditIcon, UsersIcon, InfoIcon } from '../../assets/icons';
 import { useStores } from '../../utils/hooks/useStores';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ADMINS, ROUTE_URL, USER_ID } from '../../utils/constants';
+import { ADMINS, USER_ID } from '../../utils/constants';
 import { PagesEnum } from '../../types/enums';
 import { IconVip } from '@tabler/icons';
 
@@ -50,7 +50,7 @@ const Footer = observer(() => {
     const name = event.currentTarget.dataset.name ?? '';
     PanelStore.setActivePanel(name);
 
-    navigate(`${ROUTE_URL === '' ? '/' : ROUTE_URL}${name}`);
+    navigate(`/${name}`);
   }, []);
 
   return (
