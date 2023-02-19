@@ -1,16 +1,17 @@
-import { Box } from '@mantine/core';
 import { Layout } from '../../layout';
-import { useStyles } from './styles';
-import { HomeCards } from './home-cards';
+import { useState } from 'react';
+import { StartPanel } from './panels/start';
+import { SelectPanel } from './panels/select';
+import { AccessPanel } from './panels/access-publish-photo';
 
 export const Home = () => {
-  const { classes } = useStyles();
+  const [activePanel, setActivePanel] = useState<string>('start');
 
   return (
     <Layout>
-      <Box className={classes.container}>
-        <HomeCards />
-      </Box>
+      {activePanel === 'start' && <StartPanel setActivePanel={setActivePanel} />}
+      {activePanel === 'access-publish-photo' && <AccessPanel setActivePanel={setActivePanel} />}
+      {activePanel === 'select' && <SelectPanel setActivePanel={setActivePanel} />}
     </Layout>
   );
 };

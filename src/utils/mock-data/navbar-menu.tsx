@@ -70,12 +70,12 @@ export interface IAddButtonMenu {
 export const addButtonMenu = [
   {
     icon: <ActiveUsersIcon />,
-    name: 'Пользователя',
+    label: 'Пользователя',
     value: 'user'
   },
   {
     icon: <UsersIcon />,
-    name: 'Группу',
+    label: 'Группу',
     value: 'group'
   }
 ];

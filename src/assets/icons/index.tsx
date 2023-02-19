@@ -108,8 +108,8 @@ export const ArrowLeftIcon: FC<IIcon> = ({ fill }) => {
 export const EditIcon: FC<IIcon> = ({ stroke, width, height }) => {
   return (
     <svg
-      width={width || '20'}
-      height={height || '20'}
+      width={width || '24'}
+      height={height || '24'}
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -125,9 +125,15 @@ export const EditIcon: FC<IIcon> = ({ stroke, width, height }) => {
   );
 };
 
-export const BlockIcon: FC<IIcon> = ({ stroke }) => {
+export const BlockIcon: FC<IIcon> = ({ stroke, width, height }) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width || '24'}
+      height={height || '24'}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M17 10V8C17 5.23858 14.7614 3 12 3C9.23858 3 7 5.23858 7 8V10M12 14.5V16.5M8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C17.7202 10 16.8802 10 15.2 10H8.8C7.11984 10 6.27976 10 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21Z"
         stroke={stroke ? 'black' : 'currentColor'}
@@ -138,9 +144,15 @@ export const BlockIcon: FC<IIcon> = ({ stroke }) => {
   );
 };
 
-export const InfoIcon: FC<IIcon> = ({ stroke }) => {
+export const InfoIcon: FC<IIcon> = ({ stroke, width, height }) => {
   return (
-    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width || '24'}
+      height={height || '24'}
+      viewBox="0 0 17 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g clipPath="url(#clip0_62_3568)">
         <path
           d="M8.50002 11.3333V8.49999M8.50002 5.66666H8.5071M15.5834 8.49999C15.5834 12.412 12.412 15.5833 8.50002 15.5833C4.588 15.5833 1.41669 12.412 1.41669 8.49999C1.41669 4.58797 4.588 1.41666 8.50002 1.41666C12.412 1.41666 15.5834 4.58797 15.5834 8.49999Z"
@@ -158,9 +170,15 @@ export const InfoIcon: FC<IIcon> = ({ stroke }) => {
   );
 };
 
-export const TeleportIcon: FC<IIcon> = ({ stroke }) => {
+export const TeleportIcon: FC<IIcon> = ({ stroke, width, height }) => {
   return (
-    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width || '24'}
+      height={height || '24'}
+      viewBox="0 0 17 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M13.4584 14.875L15.5834 12.75M15.5834 12.75L13.4584 10.625M15.5834 12.75H11.3334M10.9792 2.33095C12.0175 2.75127 12.75 3.76926 12.75 4.95833C12.75 6.1474 12.0175 7.1654 10.9792 7.58571M8.50002 10.625H5.66669C4.34652 10.625 3.68644 10.625 3.16575 10.8407C2.4715 11.1282 1.91993 11.6798 1.63236 12.3741C1.41669 12.8947 1.41669 13.5548 1.41669 14.875M9.56252 4.95833C9.56252 6.52314 8.29399 7.79167 6.72919 7.79167C5.16438 7.79167 3.89585 6.52314 3.89585 4.95833C3.89585 3.39353 5.16438 2.125 6.72919 2.125C8.29399 2.125 9.56252 3.39353 9.56252 4.95833Z"
         stroke={stroke ? '#242630' : 'currentColor'}
@@ -171,9 +189,15 @@ export const TeleportIcon: FC<IIcon> = ({ stroke }) => {
   );
 };
 
-export const TemplateEmptyIcon: FC<IIcon> = ({ stroke }) => {
+export const TemplateEmptyIcon: FC<IIcon> = ({ stroke, width, height }) => {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width || '24'}
+      height={height || '24'}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M2.5 6.5C2.5 5.09987 2.5 4.3998 2.77248 3.86502C3.01217 3.39462 3.39462 3.01217 3.86502 2.77248C4.3998 2.5 5.09987 2.5 6.5 2.5H13.5C14.9001 2.5 15.6002 2.5 16.135 2.77248C16.6054 3.01217 16.9878 3.39462 17.2275 3.86502C17.5 4.3998 17.5 5.09987 17.5 6.5V13.5C17.5 14.9001 17.5 15.6002 17.2275 16.135C16.9878 16.6054 16.6054 16.9878 16.135 17.2275C15.6002 17.5 14.9001 17.5 13.5 17.5H6.5C5.09987 17.5 4.3998 17.5 3.86502 17.2275C3.39462 16.9878 3.01217 16.6054 2.77248 16.135C2.5 15.6002 2.5 14.9001 2.5 13.5V6.5Z"
         stroke={stroke ? 'white' : 'currentColor'}
@@ -184,9 +208,15 @@ export const TemplateEmptyIcon: FC<IIcon> = ({ stroke }) => {
   );
 };
 
-export const TemplateLineIcon: FC<IIcon> = ({ stroke }) => {
+export const TemplateLineIcon: FC<IIcon> = ({ stroke, width, height }) => {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width || '24'}
+      height={height || '24'}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M2.5 10H17.5M2.5 5H17.5M2.5 15H17.5"
         stroke={stroke ? 'black' : 'currentColor'}
@@ -197,9 +227,15 @@ export const TemplateLineIcon: FC<IIcon> = ({ stroke }) => {
   );
 };
 
-export const TemplateDotsIcon: FC<IIcon> = ({ stroke }) => {
+export const TemplateDotsIcon: FC<IIcon> = ({ stroke, width, height }) => {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width || '24'}
+      height={height || '24'}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M10 4.99998C10.4602 4.99998 10.8333 4.62688 10.8333 4.16665C10.8333 3.70641 10.4602 3.33331 10 3.33331C9.53977 3.33331 9.16668 3.70641 9.16668 4.16665C9.16668 4.62688 9.53977 4.99998 10 4.99998Z"
         stroke={stroke ? 'black' : 'currentColor'}
@@ -258,9 +294,15 @@ export const TemplateDotsIcon: FC<IIcon> = ({ stroke }) => {
   );
 };
 
-export const TemplateСellIcon: FC<IIcon> = ({ stroke }) => {
+export const TemplateСellIcon: FC<IIcon> = ({ stroke, width, height }) => {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width || '24'}
+      height={height || '24'}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M7 2.5H3.83333C3.36662 2.5 3.13327 2.5 2.95501 2.59083C2.79821 2.67072 2.67072 2.79821 2.59083 2.95501C2.5 3.13327 2.5 3.36662 2.5 3.83333V7C2.5 7.46671 2.5 7.70007 2.59083 7.87833C2.67072 8.03513 2.79821 8.16261 2.95501 8.24251C3.13327 8.33333 3.36662 8.33333 3.83333 8.33333H7C7.46671 8.33333 7.70007 8.33333 7.87833 8.24251C8.03513 8.16261 8.16261 8.03513 8.24251 7.87833C8.33333 7.70007 8.33333 7.46671 8.33333 7V3.83333C8.33333 3.36662 8.33333 3.13327 8.24251 2.95501C8.16261 2.79821 8.03513 2.67072 7.87833 2.59083C7.70007 2.5 7.46671 2.5 7 2.5Z"
         stroke={stroke ? 'black' : 'currentColor'}

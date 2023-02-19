@@ -12,6 +12,8 @@ export interface IInfoCard {
   mainText?: string | ReactNode;
   bgColor?: string;
   fontColor?: string;
+  height?: string;
+  fontSize?: string;
 }
 
 const InfoCard: FC<IInfoCard> = observer(
@@ -23,12 +25,14 @@ const InfoCard: FC<IInfoCard> = observer(
     mainLeftIcon,
     mainText,
     bgColor,
-    fontColor
+    fontColor,
+    height,
+    fontSize
   }) => {
     const { classes } = useStyles();
 
     return (
-      <Box className={classes.card} sx={{ backgroundColor: bgColor, color: fontColor }}>
+      <Box className={classes.card} sx={{ backgroundColor: bgColor, color: fontColor, height }}>
         {header && (
           <Box className={classes.header}>
             <Box className={classes.headerLeftContent}>{headerLeftContent}</Box>
@@ -38,7 +42,9 @@ const InfoCard: FC<IInfoCard> = observer(
         )}
         <Box className={classes.main}>
           {mainLeftIcon && <Box className={classes.mainLeftIcon}>{mainLeftIcon}</Box>}
-          <Box className={classes.mainText}>{mainText}</Box>
+          <Box className={classes.mainText} sx={{ fontSize }}>
+            {mainText}
+          </Box>
         </Box>
       </Box>
     );

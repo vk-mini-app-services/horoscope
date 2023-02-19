@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 
-export const useStyles = createStyles((theme) => ({
+export const useStyles = createStyles(() => ({
   root: {
     position: 'fixed',
     bottom: '0px',
@@ -20,14 +20,14 @@ export const useStyles = createStyles((theme) => ({
     '&:hover': {
       backgroundColor: 'transparent',
       svg: {
-        color: 'black'
+        color: '#15aabf'
       }
     }
   },
 
   buttonActive: {
     svg: {
-      color: 'black'
+      color: '#15aabf'
     }
   }
 }));
