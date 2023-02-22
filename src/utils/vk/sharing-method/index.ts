@@ -1,6 +1,8 @@
 import { showNotification } from '@mantine/notifications';
 import bridge from '@vkontakte/vk-bridge';
-import { APP_URL } from '../../constants';
+import axios from 'axios';
+import { APP_URL, NAME_PROJECT, SHARING_TEXT, URL_PROXY } from '../../constants';
+import { addTextInLocalPhoto } from '../../files';
 
 // Поделиться ссылкой
 export const shareLink = () => {
@@ -46,13 +48,10 @@ export const copyLink = () => {
 };
 
 //  Поделиться в истории
-export const sharingStory = () => {
-  const urlStories =
-    'https://sun9-10.userapi.com/impg/UTdCX4NZTbH1oV7Xa_j0Ou_jcpXcR4PzfV0poA/sdgdmhgbyBM.jpg?size=887x666&quality=95&sign=2f6142a06c6c3d08030ac21d962f09f6&type=album';
-
+export const sharingStory = (link: string) => {
   bridge.send('VKWebAppShowStoryBox', {
     background_type: 'image',
-    url: urlStories,
+    url: link,
     attachment: {
       text: 'go_to',
       type: 'url',
@@ -62,11 +61,11 @@ export const sharingStory = () => {
 };
 
 //  Добавление репоста на стену пользователя
-export const share = (e: React.SyntheticEvent<any>) => {
+export const shareWall = (e: React.SyntheticEvent<any>, link: string) => {
   e.preventDefault();
 
   // заменить фото
-  const urlPhoto = `photo-215416619_457239017, ${APP_URL}`;
+  const urlPhoto = `${link}, ${APP_URL}`;
   const textStories = `Если твой клик будет последним, забираешь приз! Залетай в приложение, Приложение - ${APP_URL}`;
 
   bridge.send('VKWebAppShowWallPostBox', {
@@ -74,3 +73,74 @@ export const share = (e: React.SyntheticEvent<any>) => {
     attachments: urlPhoto
   });
 };
+
+export async function createAndShareStory(text: string, photo: File, ACCESS_TOKEN: string) {
+  console.log('ACCESS_TOKEN', ACCESS_TOKEN);
+
+  const { blob } = await addTextInLocalPhoto(text, photo, 'Узнай совместимость в приложении!');
+
+  try {
+    // canvas.toBlob(async (blob: any) => {
+    // Загрузка картинки на сервер
+    const formData = new FormData();
+    formData.append('photo', blob, 'photo.png');
+
+    const albumId = await bridge.send('VKWebAppCallAPIMethod', {
+      method: 'photos.createAlbum',
+      params: {
+        title: NAME_PROJECT,
+        description: SHARING_TEXT,
+        v: '5.131',
+        access_token: ACCESS_TOKEN
+      }
+    });
+
+    const uploadUrl = await bridge.send('VKWebAppCallAPIMethod', {
+      method: 'photos.getUploadServer',
+      params: {
+        album_id: albumId.response.id,
+        v: '5.131',
+        access_token: ACCESS_TOKEN
+      }
+    });
+
+    const { data: result } = await axios({
+      method: 'post',
+      url: `${URL_PROXY}/${uploadUrl.response.upload_url}`,
+      data: formData,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+
+    const { response } = await bridge.send('VKWebAppCallAPIMethod', {
+      method: 'photos.save',
+      params: {
+        album_id: albumId.response.id,
+        v: '5.131',
+        access_token: ACCESS_TOKEN,
+        hash: result.hash,
+        photos_list: result.photos_list,
+        server: result.server,
+        caption: SHARING_TEXT
+      }
+    });
+
+    const lastItem = response[0]?.sizes.length - 1;
+
+    const photoUrl = response[0]?.sizes[lastItem]?.url;
+
+    // Открытие редактора историй с картинкой
+    await bridge.send('VKWebAppShowStoryBox', {
+      background_type: 'image',
+      url: photoUrl,
+      attachment: {
+        text: 'go_to',
+        type: 'url',
+        url: APP_URL
+      }
+    });
+
+    // }, 'image/png');
+  } catch (error) {
+    console.log(error);
+  }
+}

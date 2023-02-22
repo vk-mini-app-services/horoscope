@@ -1,8 +1,9 @@
-import { Box, Button, Text } from '@mantine/core';
+import { Box, Button, Text, Image } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { useStores } from '../../../../../utils/hooks/useStores';
 import { useStyles } from './styles';
+import book from '../../../../../assets/img/book.png';
 
 interface IStartPanelProps {
   setActivePanel: Dispatch<SetStateAction<string>>;
@@ -22,18 +23,22 @@ export const StartPanel: FC<IStartPanelProps> = observer(({ setActivePanel }) =>
 
   return (
     <Box className={classes.container}>
+      <Image src={book} width={`calc(100vw - 400px)`} height={`calc(100vh - 400px)`} />
+
       <Box>
-        <Text fw={600} ta="center">
+        <Text fw={600} ta="center" size="xl" color="white" mb={12}>
           Привет!
         </Text>
-        <Text fw={600}>Это тематические приложение с гороскопами.</Text>
+        <Text fw={500} size="xl" color="white">
+          Это тематические приложение с гороскопами.
+        </Text>
       </Box>
 
-      <Text>
+      <Text color="#4C6283">
         {`Мы ничего не пропагандируем, информация
         является развлекательной! Если хочешь ознакомиться, жми кнопку "Начать"`}
       </Text>
-      <Button color="cyan" onClick={goSelectPanel} fullWidth>
+      <Button color="button.0" onClick={goSelectPanel} fullWidth>
         Начать
       </Button>
     </Box>

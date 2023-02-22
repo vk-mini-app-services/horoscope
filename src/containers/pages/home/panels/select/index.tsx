@@ -1,7 +1,6 @@
-import { Box, Button } from '@mantine/core';
+import { Box, Button, Text } from '@mantine/core';
 import { Dispatch, FC, SetStateAction, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { InfoCard } from '../../../../../components/info-card';
 import { PagesEnum } from '../../../../../types/enums';
 import { useStyles } from './styles';
 
@@ -21,20 +20,16 @@ export const SelectPanel: FC<ISelectPanelProps> = () => {
 
   return (
     <Box className={classes.container}>
-      <Box sx={{ width: '100%' }}>
-        <InfoCard
-          fontSize="16px"
-          height="100px"
-          bgColor="#15aabf"
-          fontColor="white"
-          mainText="В нашем приложении на данный момент доступен функционал"
-        />
+      <Box sx={{ width: '50%', height: '100%', display: 'flex', alignItems: 'center' }}>
+        <Text fw={600} ta="center" size="xl" color="white" mb={12}>
+          В нашем приложении на данный момент доступен функционал
+        </Text>
       </Box>
 
       <Box sx={{ width: '100%' }}>
         <Button
           data-value={PagesEnum.zodiacCompatibility}
-          color="cyan"
+          color="button.0"
           onClick={handleGoPage}
           fullWidth
           radius={8}
@@ -43,7 +38,7 @@ export const SelectPanel: FC<ISelectPanelProps> = () => {
         </Button>
         <Button
           data-value={PagesEnum.demonicHoroscope}
-          color="cyan"
+          color="button.0"
           onClick={handleGoPage}
           fullWidth
           radius={8}
@@ -53,7 +48,7 @@ export const SelectPanel: FC<ISelectPanelProps> = () => {
         </Button>
         <Button
           data-value={PagesEnum.horoscopeSubscription}
-          color="cyan"
+          color="button.0"
           onClick={handleGoPage}
           fullWidth
           radius={8}

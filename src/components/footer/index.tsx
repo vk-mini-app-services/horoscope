@@ -2,7 +2,7 @@ import { useCallback, SyntheticEvent } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Box, Button } from '@mantine/core';
 import { useStyles } from './styles';
-import { BookIcon, EditIcon, UsersIcon, InfoIcon } from '../../assets/icons';
+import { BookIcon, UsersIcon, StarIcon } from '../../assets/icons';
 import { useStores } from '../../utils/hooks/useStores';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ADMINS, USER_ID } from '../../utils/constants';
@@ -12,12 +12,12 @@ import { IconVip } from '@tabler/icons';
 const tabs = [
   {
     id: 1,
-    icon: <EditIcon width={24} height={24} />,
+    icon: <UsersIcon />,
     name: PagesEnum.home
   },
   {
     id: 2,
-    icon: <BookIcon />,
+    icon: <StarIcon />,
     name: PagesEnum.zodiacCompatibility
   },
   {
@@ -27,7 +27,7 @@ const tabs = [
   },
   {
     id: 4,
-    icon: <InfoIcon width={24} height={24} />,
+    icon: <BookIcon width={24} height={24} />,
     name: PagesEnum.horoscopeSubscription
   },
   {

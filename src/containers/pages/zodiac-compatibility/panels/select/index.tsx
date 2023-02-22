@@ -64,7 +64,13 @@ export const SelectPanel: FC<ISelectPanelProps> = ({ setActivePanel, setGeneralZ
         />
       </Box>
 
-      <Button color="cyan" onClick={goPanel} fullWidth radius={8}>
+      <Button
+        color="cyan"
+        onClick={goPanel}
+        fullWidth
+        radius={8}
+        disabled={!zodiacMan || !zodiacWoman}
+      >
         Узнать совместимость
       </Button>
     </Box>

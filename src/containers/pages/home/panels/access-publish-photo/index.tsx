@@ -1,10 +1,10 @@
-import { Box, Button } from '@mantine/core';
+import { Box, Button, Image, Text } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 import { Dispatch, FC, SetStateAction, useCallback } from 'react';
-import { InfoCard } from '../../../../../components/info-card';
 import { useStores } from '../../../../../utils/hooks/useStores';
 import { getUserToken } from '../../../../../utils/vk/bridge-methods';
 import { useStyles } from './styles';
+import scroll from '../../../../../assets/img/scroll.png';
 
 interface IAccessPanelProps {
   setActivePanel: Dispatch<SetStateAction<string>>;
@@ -18,7 +18,7 @@ export const AccessPanel: FC<IAccessPanelProps> = observer(({ setActivePanel }) 
     const value = event.currentTarget.dataset.value;
 
     if (value === 'yes') {
-      const hasToken = await getUserToken('friends,wall,photos,stories');
+      const hasToken = await getUserToken('friends,wall,photos,stories,groups');
 
       if (hasToken) {
         UserStore.setUserToken(hasToken);
@@ -31,21 +31,19 @@ export const AccessPanel: FC<IAccessPanelProps> = observer(({ setActivePanel }) 
 
   return (
     <Box className={classes.container}>
+      <Image src={scroll} width={200} height={200} />
+
       <Box sx={{ width: '100%' }}>
-        <InfoCard
-          fontSize="16px"
-          height="100px"
-          bgColor="#15aabf"
-          fontColor="white"
-          mainText="Хотите опубликовать свой демонический гороскоп в фотоальбом?"
-        />
+        <Text fw={600} ta="center" size="xl" color="white" mb={12}>
+          Хотите опубликовать свой демонический гороскоп в фотоальбом?
+        </Text>
       </Box>
 
       <Box className={classes.actions}>
-        <Button data-value="yes" color="cyan" onClick={handleAction} radius={8} w="49%">
+        <Button data-value="yes" color="button.0" onClick={handleAction} radius={8} w="49%">
           Да
         </Button>
-        <Button data-value="no" color="cyan" onClick={handleAction} radius={8} w="49%">
+        <Button data-value="no" color="button.4" onClick={handleAction} radius={8} w="49%">
           Нет
         </Button>
       </Box>

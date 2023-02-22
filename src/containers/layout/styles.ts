@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 
-export const useStyles = createStyles((theme) => ({
+export const useStyles = createStyles(() => ({
   root: {
     height: '100%',
     width: '100%',
@@ -10,7 +10,7 @@ export const useStyles = createStyles((theme) => ({
     flexDirection: 'column',
     marginTop: '60px',
     padding: 0,
-    backgroundColor: theme.colors.backgroundGray[0]
+    backgroundColor: '#132136'
   },
   content: {
     height: `calc(100vh - 60px)`,

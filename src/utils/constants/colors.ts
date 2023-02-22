@@ -36,5 +36,17 @@ export const themeColors: Record<string, Tuple<string, 10>> = {
     '#e7e7ef',
     '#e9eaf1',
     '#ececf2'
+  ],
+  button: [
+    '#2775bc', // голубой
+    '#347dc0',
+    '#4085c4',
+    '#233653', // оливковый
+    '#30425d',
+    '#3d4e67',
+    '#',
+    '#',
+    '#',
+    '#'
   ]
 };

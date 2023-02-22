@@ -1,12 +1,23 @@
 import { Box, Button } from '@mantine/core';
+import { observer } from 'mobx-react-lite';
 import { Dispatch, FC, SetStateAction, useCallback } from 'react';
 import { DropdownMenu } from '../../../../../components/dropdown-menu';
-import { InfoCard } from '../../../../../components/info-card';
+
 import { IListItem } from '../../../../../types';
 import { PagesEnum } from '../../../../../types/enums';
 import { zodiacCompatibility } from '../../../../../utils/mock-data/zodiac-compatibility';
-import { copyLink, share, shareLink, sharingStory } from '../../../../../utils/vk/sharing-method';
+import {
+  copyLink,
+  createAndShareStory,
+  shareWall,
+  shareLink
+} from '../../../../../utils/vk/sharing-method';
 import { useStyles } from './styles';
+import zodiacCompatibilityResultPhoto from '../../../../../assets/img/zodiac-compatibility/zodiac-compatibility.png';
+import { useStores } from '../../../../../utils/hooks/useStores';
+import { convertToLocalFile } from '../../../../../utils/files';
+import { PhotoResult } from '../../../../../components/generate-photo/test';
+import { demonicHoroscopeResultForWall } from '../../../../../utils/results-img/demonic-horoscope-result';
 
 const list: IListItem[] = [
   {
@@ -32,41 +43,48 @@ interface IResultPanelProps {
   generalZodiac: string;
 }
 
-export const ResultPanel: FC<IResultPanelProps> = ({ generalZodiac }) => {
+export const ResultPanel: FC<IResultPanelProps> = observer(({ generalZodiac }) => {
   const { classes } = useStyles();
+  const { UserStore } = useStores();
 
-  const handleClickMenuItem = useCallback((event: React.SyntheticEvent<HTMLButtonElement>) => {
-    const value = event.currentTarget.dataset.value ?? '';
+  const getPhoto = async (): Promise<File> => {
+    const photo = await convertToLocalFile(zodiacCompatibilityResultPhoto);
+    return photo;
+  };
 
-    switch (value) {
-      case 'send':
-        shareLink();
-        break;
-      case 'stories':
-        sharingStory();
-        break;
-      case 'wall':
-        share(event);
-        break;
-      case 'copy':
-        copyLink();
-        break;
-      default:
-        break;
-    }
-  }, []);
+  const handleClickMenuItem = useCallback(
+    async (event: React.SyntheticEvent<HTMLButtonElement>) => {
+      const value = event.currentTarget.dataset.value ?? '';
+
+      const photo = await getPhoto();
+
+      switch (value) {
+        case 'send':
+          shareLink();
+          break;
+        case 'stories':
+          await createAndShareStory(zodiacCompatibility[generalZodiac], photo, UserStore.token);
+          break;
+        case 'wall':
+          shareWall(event, demonicHoroscopeResultForWall['aries']);
+
+          break;
+        case 'copy':
+          copyLink();
+          break;
+        default:
+          break;
+      }
+    },
+    []
+  );
 
   return (
     <Box className={classes.container}>
-      <Box sx={{ width: '100%' }}>
-        <InfoCard
-          fontSize="16px"
-          height="100px"
-          bgColor="#15aabf"
-          fontColor="white"
-          mainText={zodiacCompatibility[generalZodiac]}
-        />
-      </Box>
+      <PhotoResult
+        localLink={zodiacCompatibilityResultPhoto}
+        resultText={zodiacCompatibility[generalZodiac]}
+      />
 
       <Box sx={{ width: '100%' }}>
         <DropdownMenu list={list} handleClick={handleClickMenuItem} width="calc(100% - 48px)">
@@ -83,4 +101,4 @@ export const ResultPanel: FC<IResultPanelProps> = ({ generalZodiac }) => {
       </Box>
     </Box>
   );
-};
+});

@@ -1,4 +1,4 @@
-export const APP_ID = 51559133;
+export const APP_ID = 51560752;
 export const APP_URL = `https://vk.com/app${APP_ID}`;
 export const GROUP_ID = '';
 export const NAME_PROJECT = 'horoscope';
