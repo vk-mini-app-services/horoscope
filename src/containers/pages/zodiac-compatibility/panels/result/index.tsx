@@ -1,6 +1,6 @@
 import { Box, Button } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
-import { Dispatch, FC, SetStateAction, useCallback } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { DropdownMenu } from '../../../../../components/dropdown-menu';
 
 import { IListItem } from '../../../../../types';
@@ -8,16 +8,22 @@ import { PagesEnum } from '../../../../../types/enums';
 import { zodiacCompatibility } from '../../../../../utils/mock-data/zodiac-compatibility';
 import {
   copyLink,
-  createAndShareStory,
   shareWall,
-  shareLink
+  shareLink,
+  sharingStory
 } from '../../../../../utils/vk/sharing-method';
 import { useStyles } from './styles';
 import zodiacCompatibilityResultPhoto from '../../../../../assets/img/zodiac-compatibility/zodiac-compatibility.png';
-import { useStores } from '../../../../../utils/hooks/useStores';
-import { convertToLocalFile } from '../../../../../utils/files';
-import { PhotoResult } from '../../../../../components/generate-photo/test';
-import { demonicHoroscopeResultForWall } from '../../../../../utils/results-img/demonic-horoscope-result';
+import {
+  addTextInLocalPhotoNew,
+  convertToLocalFile,
+  uploadImage
+} from '../../../../../utils/files';
+import { PhotoResult } from '../../../../../components/generate-photo';
+import {
+  compatibilityResultLink,
+  compatibilityResultLinkForWall
+} from '../../../../../utils/results-img/compatibility-result';
 
 const list: IListItem[] = [
   {
@@ -45,29 +51,22 @@ interface IResultPanelProps {
 
 export const ResultPanel: FC<IResultPanelProps> = observer(({ generalZodiac }) => {
   const { classes } = useStyles();
-  const { UserStore } = useStores();
 
-  const getPhoto = async (): Promise<File> => {
-    const photo = await convertToLocalFile(zodiacCompatibilityResultPhoto);
-    return photo;
-  };
+  const [sharingPhotoUrl, setSharingPhotoUrl] = useState<string>('');
 
   const handleClickMenuItem = useCallback(
     async (event: React.SyntheticEvent<HTMLButtonElement>) => {
       const value = event.currentTarget.dataset.value ?? '';
-
-      const photo = await getPhoto();
 
       switch (value) {
         case 'send':
           shareLink();
           break;
         case 'stories':
-          await createAndShareStory(zodiacCompatibility[generalZodiac], photo, UserStore.token);
+          await sharingStory(sharingPhotoUrl);
           break;
         case 'wall':
-          shareWall(event, demonicHoroscopeResultForWall['aries']);
-
+          shareWall(event, compatibilityResultLinkForWall);
           break;
         case 'copy':
           copyLink();
@@ -76,8 +75,28 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ generalZodiac }) =
           break;
       }
     },
-    []
+    [sharingPhotoUrl]
   );
+
+  useEffect(() => {
+    (async () => {
+      const photFile = await convertToLocalFile(zodiacCompatibilityResultPhoto);
+      const { file } = await addTextInLocalPhotoNew(
+        zodiacCompatibility[generalZodiac],
+        photFile,
+        'Переходи по ссылке в приложение'
+      );
+
+      const linkPhoto = await uploadImage(file);
+
+      if (linkPhoto) {
+        setSharingPhotoUrl(linkPhoto);
+      } else {
+        // TODO: добавить ссылку на статичныую картинку, если не получится загрузить основную фото
+        setSharingPhotoUrl(compatibilityResultLink);
+      }
+    })();
+  }, []);
 
   return (
     <Box className={classes.container}>
@@ -90,10 +109,11 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ generalZodiac }) =
         <DropdownMenu list={list} handleClick={handleClickMenuItem} width="calc(100% - 48px)">
           <Button
             data-value={PagesEnum.horoscopeSubscription}
-            color="cyan"
+            color="button.0"
             fullWidth
             radius={8}
             mt={8}
+            sx={{ fontWeight: 500 }}
           >
             Поделиться результатом
           </Button>

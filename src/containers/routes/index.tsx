@@ -20,7 +20,7 @@ export const MainRoutes = () => {
         <Route path={`/${PagesEnum.horoscopeSubscription}`} element={<HoroscopeSubscription />} />
         <Route path={`/${PagesEnum.notifications}`} element={<Notifications />} />
         <Route path={`/${PagesEnum.admin}`} element={<Admin />} />
-        <Route path="/" element={<Navigate replace to="/home" />} />
+        <Route path="/" element={<Navigate replace to={`/${PagesEnum.home}`} />} />
       </Routes>
     </BrowserRouter>
   );

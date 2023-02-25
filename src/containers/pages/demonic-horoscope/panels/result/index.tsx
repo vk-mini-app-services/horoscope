@@ -14,6 +14,18 @@ import {
   sharingStory
 } from '../../../../../utils/vk/sharing-method';
 import { useStyles } from './styles';
+import aries from '../../../../../assets/img/demonic-horoscope/aries.png';
+import taurus from '../../../../../assets/img/demonic-horoscope/taurus.png';
+import gemini from '../../../../../assets/img/demonic-horoscope/gemini.png';
+import cancer from '../../../../../assets/img/demonic-horoscope/cancer.png';
+import leo from '../../../../../assets/img/demonic-horoscope/leo.png';
+import virgo from '../../../../../assets/img/demonic-horoscope/virgo.png';
+import libra from '../../../../../assets/img/demonic-horoscope/libra.png';
+import scorpio from '../../../../../assets/img/demonic-horoscope/scorpio.png';
+import sagittarius from '../../../../../assets/img/demonic-horoscope/sagittarius.png';
+import capricorn from '../../../../../assets/img/demonic-horoscope/capricorn.png';
+import aquarius from '../../../../../assets/img/demonic-horoscope/aquarius.png';
+import pisces from '../../../../../assets/img/demonic-horoscope/pisces.png';
 
 const list: IListItem[] = [
   {
@@ -33,6 +45,21 @@ const list: IListItem[] = [
     value: 'copy'
   }
 ];
+
+const zodiacLocalPhoto: { [key: string]: string } = {
+  aries: aries,
+  taurus: taurus,
+  gemini: gemini,
+  cancer: cancer,
+  leo: leo,
+  virgo: virgo,
+  libra: libra,
+  scorpio: scorpio,
+  sagittarius: sagittarius,
+  capricorn: capricorn,
+  aquarius: aquarius,
+  pisces: pisces
+};
 
 interface IResultPanelProps {
   setActivePanel: Dispatch<SetStateAction<string>>;
@@ -67,19 +94,21 @@ export const ResultPanel: FC<IResultPanelProps> = ({ zodiac }) => {
     <Box className={classes.container}>
       <Image
         radius="md"
-        src={demonicHoroscopeResult[zodiac]}
-        alt="Random unsplash image"
+        src={zodiacLocalPhoto[zodiac]}
+        alt="horoscope png"
         height={`calc(100vh - 250px)`}
+        fit="contain"
       />
 
       <Box sx={{ width: '100%' }}>
         <DropdownMenu list={list} handleClick={handleClickMenuItem} width="calc(100% - 48px)">
           <Button
             data-value={PagesEnum.horoscopeSubscription}
-            color="cyan"
+            color="button.0"
             fullWidth
             radius={8}
             mt={8}
+            sx={{ fontWeight: 500 }}
           >
             Поделиться результатом
           </Button>

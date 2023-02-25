@@ -40,10 +40,24 @@ export const AccessPanel: FC<IAccessPanelProps> = observer(({ setActivePanel }) 
       </Box>
 
       <Box className={classes.actions}>
-        <Button data-value="yes" color="button.0" onClick={handleAction} radius={8} w="49%">
+        <Button
+          data-value="yes"
+          color="button.0"
+          onClick={handleAction}
+          radius={8}
+          w="49%"
+          sx={{ fontWeight: 500 }}
+        >
           Да
         </Button>
-        <Button data-value="no" color="button.4" onClick={handleAction} radius={8} w="49%">
+        <Button
+          data-value="no"
+          color="button.4"
+          onClick={handleAction}
+          radius={8}
+          w="49%"
+          sx={{ fontWeight: 500 }}
+        >
           Нет
         </Button>
       </Box>

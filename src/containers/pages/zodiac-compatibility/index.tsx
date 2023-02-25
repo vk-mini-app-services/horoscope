@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Layout } from '../../layout';
 import { ResultPanel } from './panels/result';
 import { SelectPanel } from './panels/select';
@@ -6,11 +6,6 @@ import { SelectPanel } from './panels/select';
 export const ZodiacCompatibility = () => {
   const [activePanel, setActivePanel] = useState<string>('select');
   const [generalZodiac, setGeneralZodiac] = useState<string>('');
-
-  useEffect(() => {
-    console.log('generalZodiac', generalZodiac);
-    console.log('generalZodiac', generalZodiac);
-  }, [generalZodiac]);
 
   return (
     <Layout>

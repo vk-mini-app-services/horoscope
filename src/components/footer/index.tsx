@@ -7,22 +7,22 @@ import { useStores } from '../../utils/hooks/useStores';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ADMINS, USER_ID } from '../../utils/constants';
 import { PagesEnum } from '../../types/enums';
-import { IconVip } from '@tabler/icons';
+import { IconHome2, IconVip } from '@tabler/icons';
 
 const tabs = [
   {
     id: 1,
-    icon: <UsersIcon />,
+    icon: <IconHome2 />,
     name: PagesEnum.home
   },
   {
     id: 2,
-    icon: <StarIcon />,
+    icon: <UsersIcon />,
     name: PagesEnum.zodiacCompatibility
   },
   {
     id: 3,
-    icon: <UsersIcon />,
+    icon: <StarIcon />,
     name: PagesEnum.demonicHoroscope
   },
   {
@@ -64,6 +64,7 @@ const Footer = observer(() => {
             })}
             onClick={handleClick}
             key={item.id}
+            sx={{ fontWeight: 500 }}
           >
             {item.icon}
           </Button>

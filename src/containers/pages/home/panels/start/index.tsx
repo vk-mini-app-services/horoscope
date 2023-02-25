@@ -23,8 +23,7 @@ export const StartPanel: FC<IStartPanelProps> = observer(({ setActivePanel }) =>
 
   return (
     <Box className={classes.container}>
-      <Image src={book} width={`calc(100vw - 400px)`} height={`calc(100vh - 400px)`} />
-
+      <Image src={book} width={200} height={200} fit="contain" />
       <Box>
         <Text fw={600} ta="center" size="xl" color="white" mb={12}>
           Привет!
@@ -38,7 +37,7 @@ export const StartPanel: FC<IStartPanelProps> = observer(({ setActivePanel }) =>
         {`Мы ничего не пропагандируем, информация
         является развлекательной! Если хочешь ознакомиться, жми кнопку "Начать"`}
       </Text>
-      <Button color="button.0" onClick={goSelectPanel} fullWidth>
+      <Button color="button.0" onClick={goSelectPanel} fullWidth sx={{ fontWeight: 500 }}>
         Начать
       </Button>
     </Box>

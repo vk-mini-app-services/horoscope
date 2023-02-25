@@ -2,7 +2,7 @@ import { showNotification } from '@mantine/notifications';
 import bridge from '@vkontakte/vk-bridge';
 import axios from 'axios';
 import { APP_URL, NAME_PROJECT, SHARING_TEXT, URL_PROXY } from '../../constants';
-import { addTextInLocalPhoto } from '../../files';
+import { addTextInLocalPhotoNew } from '../../files';
 
 // Поделиться ссылкой
 export const shareLink = () => {
@@ -48,8 +48,8 @@ export const copyLink = () => {
 };
 
 //  Поделиться в истории
-export const sharingStory = (link: string) => {
-  bridge.send('VKWebAppShowStoryBox', {
+export const sharingStory = async (link: string) => {
+  return await bridge.send('VKWebAppShowStoryBox', {
     background_type: 'image',
     url: link,
     attachment: {
@@ -66,18 +66,15 @@ export const shareWall = (e: React.SyntheticEvent<any>, link: string) => {
 
   // заменить фото
   const urlPhoto = `${link}, ${APP_URL}`;
-  const textStories = `Если твой клик будет последним, забираешь приз! Залетай в приложение, Приложение - ${APP_URL}`;
 
   bridge.send('VKWebAppShowWallPostBox', {
-    message: textStories,
+    message: SHARING_TEXT,
     attachments: urlPhoto
   });
 };
 
 export async function createAndShareStory(text: string, photo: File, ACCESS_TOKEN: string) {
-  console.log('ACCESS_TOKEN', ACCESS_TOKEN);
-
-  const { blob } = await addTextInLocalPhoto(text, photo, 'Узнай совместимость в приложении!');
+  const { blob } = await addTextInLocalPhotoNew(text, photo, 'Узнай совместимость в приложении!');
 
   try {
     // canvas.toBlob(async (blob: any) => {
@@ -127,6 +124,8 @@ export async function createAndShareStory(text: string, photo: File, ACCESS_TOKE
     const lastItem = response[0]?.sizes.length - 1;
 
     const photoUrl = response[0]?.sizes[lastItem]?.url;
+
+    console.log('response', response);
 
     // Открытие редактора историй с картинкой
     await bridge.send('VKWebAppShowStoryBox', {

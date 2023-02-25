@@ -14,7 +14,7 @@ interface ICurrentTitle {
 
 const currentTitle: ICurrentTitle = {
   home: 'Главная',
-  [PagesEnum.zodiacCompatibility]: 'Совместимость знаков зодиака',
+  [PagesEnum.zodiacCompatibility]: 'Совместимость знаков',
   [PagesEnum.demonicHoroscope]: 'Демонический гороскоп',
   [PagesEnum.horoscopeSubscription]: 'Подписка на рассылку',
   [PagesEnum.notifications]: 'Гороскоп',

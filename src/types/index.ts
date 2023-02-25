@@ -10,3 +10,7 @@ export interface IListItem {
 export interface IComponentDefaultProps {
   children?: ReactElement;
 }
+
+export interface IZodiac {
+  [key: string]: any;
+}

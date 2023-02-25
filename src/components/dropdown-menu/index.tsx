@@ -89,6 +89,7 @@ export const DropdownMenu: FC<IDropdownMenu> = ({
               size="xs"
               color="mainBlue.9"
               onClick={handleClick}
+              sx={{ fontWeight: 500 }}
             >
               Изменить
             </Button>

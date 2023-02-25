@@ -1,6 +1,8 @@
-import { Box, Button, Select } from '@mantine/core';
-import { IconChevronDown, IconCirclePlus } from '@tabler/icons';
+import { Box, Button, Select, Space } from '@mantine/core';
+import { IconChevronDown } from '@tabler/icons';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { GenderFemaleIcon, GenderMaleIcon } from '../../../../../assets/icons';
+import { LabelSelect } from '../../../../../components/label-select';
 import ZodiacItem from '../../../../../components/zodiac-item';
 
 import { zodiacSignListRU } from '../../../../../utils/mock-data/zodiac-signs';
@@ -35,11 +37,11 @@ export const SelectPanel: FC<ISelectPanelProps> = ({ setActivePanel, setGeneralZ
   return (
     <Box className={classes.container}>
       <Box w="100%">
+        <LabelSelect label="Выберите знак зодиака мужчины" icon={<GenderMaleIcon />} />
         <Select
           className={classes.select}
           clearable
           data={zodiacSignListRU}
-          label="Выберите знак зодиака мужчины"
           placeholder="Выберите..."
           itemComponent={ZodiacItem}
           onChange={handleChangeZodiacMan}
@@ -47,15 +49,13 @@ export const SelectPanel: FC<ISelectPanelProps> = ({ setActivePanel, setGeneralZ
           rightSection={<IconChevronDown color="#98A2B3" />}
         />
 
-        <Box className={classes.center}>
-          <IconCirclePlus size="80px" color="#15aabf" />
-        </Box>
+        <Space h="xl" />
 
+        <LabelSelect label="Выберите знак зодиака женщины" icon={<GenderFemaleIcon />} />
         <Select
           className={classes.select}
           clearable
           data={zodiacSignListRU}
-          label="Выберите знак зодиака женщины"
           placeholder="Выберите..."
           itemComponent={ZodiacItem}
           onChange={handleChangeZodiacWoman}
@@ -65,11 +65,12 @@ export const SelectPanel: FC<ISelectPanelProps> = ({ setActivePanel, setGeneralZ
       </Box>
 
       <Button
-        color="cyan"
+        color="button.0"
         onClick={goPanel}
         fullWidth
         radius={8}
         disabled={!zodiacMan || !zodiacWoman}
+        sx={{ fontWeight: 500 }}
       >
         Узнать совместимость
       </Button>

@@ -1,64 +1,64 @@
 export const demonicHoroscopeResult: { [key: string]: string } = {
   //Овен
   aries:
-    'https://sun9-66.userapi.com/impf/c629228/v629228763/2151/m8lso35ZHx4.jpg?size=100x100&quality=96&sign=6027e672f337b438040f8bc79f95dcd2&type=album',
+    'https://sun9-77.userapi.com/impg/egTTi3lNlqTAqiyghg7Q_-444ERx1Pl6JZCjxw/hiDdSZkHJ50.jpg?size=494x700&quality=95&sign=924a26c7a0a6fee72e31dc1e00b7493a&type=album',
   // Телец
   taurus:
-    'https://sun7-6.userapi.com/impf/c629228/v629228763/2158/wmg5-vLlh6c.jpg?size=100x100&quality=96&sign=0ddb29be67f8e9172ebab430657f7bfe&type=album',
+    'https://sun9-28.userapi.com/impg/iX3KSFt7lhn9n01qYMCei0N2CT1w0zjDKRpiUw/Q6QPSnxsoO0.jpg?size=494x700&quality=95&sign=c104176794bad8ae6c02cc49d28681e1&type=album',
   // Близнецы
   gemini:
-    'https://sun9-36.userapi.com/impf/c629228/v629228763/213c/-2IiPG9cjnI.jpg?size=100x100&quality=96&sign=1cd85d7b31f335d41c2d4da0357acff8&type=album',
+    'https://sun9-21.userapi.com/impg/PdHvgH2a5G5U19_YTsda6HSDaY3ihRPne8Va_A/sFS5POPL1aM.jpg?size=494x700&quality=95&sign=1ce3a3deccf04e0301bd46351fcd27d1&type=album',
   // Рак
   cancer:
-    'https://sun9-65.userapi.com/impf/c629228/v629228763/2127/4iYAmsqDlFs.jpg?size=100x100&quality=96&sign=06807e858e87a8f5946a7ddb1e526e33&type=album',
+    'https://sun9-73.userapi.com/impg/RCD9cVveykQ2_qL-IoswzgshMY5UDLFO97GOTg/hyEtupTUhTc.jpg?size=494x700&quality=95&sign=ca5bbd5a63b9feb008a8cfce46bdabb9&type=album',
   // Лев
-  leo: 'https://sun9-28.userapi.com/impf/c629228/v629228763/2166/cx7pQ_tXVi8.jpg?size=100x100&quality=96&sign=9df49fb8d2d13083d49719f4b6479d0b&type=album',
+  leo: 'https://sun9-65.userapi.com/impg/5qUbcO4diLwV1t841R9fVVf_b-BXAGPaZY4Jrw/o4XIQxAPFBw.jpg?size=494x700&quality=95&sign=16dd191bb39755cd7cd59456a10d3262&type=album',
   // Дева
   virgo:
-    'https://sun9-10.userapi.com/impf/c629228/v629228763/2119/RdMLrr5XcIg.jpg?size=100x100&quality=96&sign=fd5c870de491b7106e506914d33d0ddc&type=album',
+    'https://sun9-46.userapi.com/impg/Sfqjm4zS_8hlLcZfN1bZ0yZzEu4tfrzNcJ3Uzg/3iWxYbPJaXY.jpg?size=494x700&quality=95&sign=a812a6e87084a72969fceb0a3f06b987&type=album',
   // Весы
   libra:
-    'https://sun9-39.userapi.com/impf/c629228/v629228763/2120/rxGKaeQ5XfA.jpg?size=100x100&quality=96&sign=141cd68ef37c543982423817ce6abc54&type=album',
+    'https://sun9-47.userapi.com/impg/uR2t8VMZdUPvSnacc8yMrwgSvmMA2UeAk6mclw/LkqrZoxuNoo.jpg?size=494x700&quality=95&sign=0a032b6e77cec3fd5573e0591fc87cb5&type=album',
   // Скорпион
   scorpio:
-    'https://sun9-18.userapi.com/impf/c629228/v629228763/2112/Azw6p8ukCOk.jpg?size=100x100&quality=96&sign=3de560f231f168a179c9f82faf7453ac&type=album',
+    'https://sun9-1.userapi.com/impg/s6pjpjLLgHj6xcW1yNrNts6U1GHyttsvb4WZOw/khKPyBBnp6Q.jpg?size=494x700&quality=95&sign=67cb5cf7ecbac57379f00cd06003ce8e&type=album',
   // Стрелец
   sagittarius:
-    'https://sun9-50.userapi.com/impf/c629228/v629228763/214a/cLfjOiIuhuk.jpg?size=100x100&quality=96&sign=89d3d30b3bdac9c4d28e75cb48a3942d&type=album',
+    'https://sun9-53.userapi.com/impg/LpsO3ZjUlBit0yEx1gfkjIUCX1USbGusNjVTGQ/narBy0e0aps.jpg?size=494x700&quality=95&sign=2374f2eda3974915eb1f1be3ed1966da&type=album',
   // Козерог
   capricorn:
-    'https://sun9-42.userapi.com/impf/c629228/v629228763/215f/0QAY6damFYU.jpg?size=100x100&quality=96&sign=af5dd8adbf7737c19b6cc060a2d164b2&type=album',
+    'https://sun9-3.userapi.com/impg/CN_Rq05kbbbTzcnYQGKN9GzkyTgLbqFGDcvf_Q/AKc5DpEcYzI.jpg?size=494x700&quality=95&sign=1f2175578c6edfc943dadea8a6d985d9&type=album',
   // Водолей
   aquarius:
-    'https://sun9-37.userapi.com/impf/c629228/v629228763/2143/HhSVEXIuLiI.jpg?size=100x100&quality=96&sign=3cda2e472c190b3ab9fc9e984b227021&type=album',
+    'https://sun9-56.userapi.com/impg/TafbmoxZxzyAlMLFILANn3-zgDLXoV0rruNt0Q/SqSAN6R8oD0.jpg?size=494x700&quality=95&sign=52e89c6313e1fa3bece0c3e5c5cbf438&type=album',
   // Рыбы
   pisces:
-    'https://sun9-44.userapi.com/impf/c629228/v629228763/212e/HFkBjC-WxT8.jpg?size=100x100&quality=96&sign=eda3dcd914082bcb8e5bf93cac0193c6&type=album'
+    'https://sun9-19.userapi.com/impg/vYImlMXmBy5rqRc3iNjEZ86iVbfgBM16Nv95-g/3pYAdp7cLQo.jpg?size=494x700&quality=95&sign=a5595e02520ec411ad4df6db7bfe7509&type=album'
 };
 
 export const demonicHoroscopeResultForWall: { [key: string]: string } = {
   //Овен
-  aries: 'photo-96211150_370959975',
+  aries: 'photo-219014651_457239020',
   // Телец
-  taurus: 'photo-96211150_370959997',
+  taurus: 'photo-219014651_457239021',
   // Близнецы
-  gemini: 'photo-96211150_370959893',
+  gemini: 'photo-219014651_457239022',
   // Рак
-  cancer: 'photo-96211150_370959825',
+  cancer: 'photo-219014651_457239023',
   // Лев
-  leo: 'photo-96211150_370960088',
+  leo: 'photo-219014651_457239024',
   // Дева
-  virgo: 'photo-96211150_370959787',
+  virgo: 'photo-219014651_457239025',
   // Весы
-  libra: 'photo-96211150_370959812',
+  libra: 'photo-219014651_457239026',
   // Скорпион
-  scorpio: 'photo-96211150_370959727',
+  scorpio: 'photo-219014651_457239027',
   // Стрелец
-  sagittarius: 'photo-96211150_370959949',
+  sagittarius: 'photo-219014651_457239028',
   // Козерог
-  capricorn: 'photo-96211150_370960076',
+  capricorn: 'photo-219014651_457239017',
   // Водолей
-  aquarius: 'photo-96211150_370959928',
+  aquarius: 'photo-219014651_457239018',
   // Рыбы
-  pisces: 'photo-96211150_370959847'
+  pisces: 'photo-219014651_457239019'
 };

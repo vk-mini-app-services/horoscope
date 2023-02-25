@@ -10,24 +10,24 @@ export const useStyles = createStyles((theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'white',
+    backgroundColor: '#0D1116',
     padding: `0 ${theme.spacing.sm}px`
   },
   button: {
     backgroundColor: 'transparent',
-    color: '#D6D7E4',
+    color: '#223653',
 
     '&:hover': {
       backgroundColor: 'transparent',
       svg: {
-        color: '#132136'
+        color: '#2775BC'
       }
     }
   },
 
   buttonActive: {
     svg: {
-      color: '#132136'
+      color: '#2775BC'
     }
   }
 }));

@@ -33,6 +33,7 @@ export const SelectPanel: FC<ISelectPanelProps> = () => {
           onClick={handleGoPage}
           fullWidth
           radius={8}
+          sx={{ fontWeight: 500 }}
         >
           Совместимость знаков зодиака
         </Button>
@@ -43,6 +44,7 @@ export const SelectPanel: FC<ISelectPanelProps> = () => {
           fullWidth
           radius={8}
           mt={8}
+          sx={{ fontWeight: 500 }}
         >
           {`Кто ты по "Демоническому гороскопу"`}
         </Button>
@@ -53,6 +55,7 @@ export const SelectPanel: FC<ISelectPanelProps> = () => {
           fullWidth
           radius={8}
           mt={8}
+          sx={{ fontWeight: 500 }}
         >
           Получать актуальный гороскоп каждый день
         </Button>

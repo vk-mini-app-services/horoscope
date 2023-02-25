@@ -11,8 +11,8 @@ export const useStyles = createStyles(() => ({
     padding: '0px 22px',
     position: 'fixed',
     top: 0,
-    backgroundColor: 'white',
-    zIndex: 9999
+    backgroundColor: '#0D1116',
+    zIndex: 1000
   },
   icon: {
     display: 'flex',
@@ -30,6 +30,7 @@ export const useStyles = createStyles(() => ({
 
   title: {
     fontSize: '15px',
-    fontWeight: 500
+    fontWeight: 500,
+    color: 'white'
   }
 }));

@@ -1,7 +1,7 @@
 import { Box, Image, Loader } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 import { FC, useEffect, useState } from 'react';
-import { addTextInLocalPhoto, convertToLocalFile } from '../../utils/files';
+import { addTextInLocalPhotoNew, convertToLocalFile } from '../../utils/files';
 
 interface IPhotoResultProps {
   localLink: string;
@@ -14,7 +14,7 @@ export const PhotoResult: FC<IPhotoResultProps> = observer(({ localLink, resultT
   useEffect(() => {
     (async () => {
       const photFile = await convertToLocalFile(localLink);
-      const { base64 } = await addTextInLocalPhoto(resultText, photFile, '');
+      const { base64 } = await addTextInLocalPhotoNew(resultText, photFile, '');
       setPhoto(base64);
     })();
   }, []);

@@ -1,7 +1,7 @@
-import { Box, Button, Select } from '@mantine/core';
+import { Box, Button, Select, Text } from '@mantine/core';
 import { IconChevronDown } from '@tabler/icons';
 import { Dispatch, FC, SetStateAction } from 'react';
-import { InfoCard } from '../../../../../components/info-card';
+import { LabelSelect } from '../../../../../components/label-select';
 import ZodiacItem from '../../../../../components/zodiac-item';
 
 import { zodiacSignList } from '../../../../../utils/mock-data/zodiac-signs';
@@ -20,7 +20,7 @@ export const SelectPanel: FC<ISelectPanelProps> = ({ setActivePanel, setZodiac, 
     setActivePanel('result');
   };
 
-  const handleChangeZodiacMan = (value: string) => {
+  const handleChangeZodiac = (value: string) => {
     setZodiac(value);
   };
 
@@ -28,29 +28,38 @@ export const SelectPanel: FC<ISelectPanelProps> = ({ setActivePanel, setZodiac, 
     <Box className={classes.container}>
       <Box className={classes.center}>
         <Box sx={{ width: '100%' }}>
-          <InfoCard
-            fontSize="16px"
-            height="100px"
-            bgColor="#15aabf"
-            fontColor="white"
-            mainText="Написать интересный завликающий текст"
-          />
+          <Text fw={600} ta="center" size="xl" color="white" mb={40}>
+            В каждом из нас есть скрытый демон
+          </Text>
+          <Text color="#4C6283">
+            Зная своего демона, можно лучше понять и принять свою темную сторону, а также научится
+            договориться с ним.
+          </Text>
         </Box>
 
-        <Select
-          className={classes.select}
-          clearable
-          data={zodiacSignList}
-          label="Выберите знак зодиака женщины"
-          placeholder="Выберите..."
-          itemComponent={ZodiacItem}
-          onChange={handleChangeZodiacMan}
-          value={zodiac}
-          rightSection={<IconChevronDown color="#98A2B3" />}
-        />
+        <Box sx={{ width: '100%' }}>
+          <LabelSelect label="Выберите Ваш знак зодиака" />
+          <Select
+            className={classes.select}
+            clearable
+            data={zodiacSignList}
+            placeholder="Выберите..."
+            itemComponent={ZodiacItem}
+            onChange={handleChangeZodiac}
+            value={zodiac}
+            rightSection={<IconChevronDown color="#98A2B3" />}
+          />
+        </Box>
       </Box>
 
-      <Button color="cyan" onClick={goPanel} fullWidth radius={8} disabled={!zodiac}>
+      <Button
+        color="button.0"
+        sx={{ fontWeight: 500 }}
+        onClick={goPanel}
+        fullWidth
+        radius={8}
+        disabled={!zodiac}
+      >
         Узнать совместимость
       </Button>
     </Box>
