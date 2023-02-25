@@ -12,6 +12,7 @@ interface IDatePickerFormProps {
   disabled?: boolean;
   clearable?: boolean;
   placeholder?: string;
+  dropdownType?: 'popover' | 'modal';
 }
 
 export const DatePickerForm: FC<IDatePickerFormProps> = ({
@@ -20,12 +21,14 @@ export const DatePickerForm: FC<IDatePickerFormProps> = ({
   className,
   disabled,
   label,
-  placeholder
+  placeholder,
+  dropdownType
 }) => {
   const { classes, cx } = useStyles();
 
   return (
     <DatePicker
+      dropdownType={dropdownType}
       className={cx(classes.birthDate, className)}
       locale="ru"
       inputFormat="DD.MM.YYYY"

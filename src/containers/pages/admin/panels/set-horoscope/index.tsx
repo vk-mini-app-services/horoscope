@@ -12,8 +12,7 @@ import { DatePickerForm } from '../../../../../components/fields/date-picker-for
 import { TextareaField } from '../../../../../components/fields/textarea-field';
 import { z } from 'zod';
 import { getValidateErrors } from '../../../../../utils/validation';
-import { useStores } from '../../../../../utils/hooks/useStores';
-import { toJS } from 'mobx';
+import { useMediaQuery } from '@mantine/hooks';
 
 const today = new Date();
 const yesterday = new Date(today.getTime());
@@ -43,9 +42,7 @@ export const SetHoroscopePanel = observer(() => {
   const { classes } = useStyles();
   const [datePickerKey, setDatePickerKey] = useState<number>(0);
 
-  const { UserStore } = useStores();
-
-  console.log('UserStore', toJS(UserStore.groups));
+  const isMobile = useMediaQuery('(max-width: 755px)');
 
   const form = useForm({
     initialValues: dataForm,
@@ -107,6 +104,7 @@ export const SetHoroscopePanel = observer(() => {
         <ScrollContainer className={classes.scroll}>
           <SimpleGrid cols={2} mt={16} w="100%">
             <DatePickerForm
+              dropdownType={isMobile ? 'modal' : 'popover'}
               key={datePickerKey}
               fieldName="date"
               placeholder="Выберите дату гороскопа"

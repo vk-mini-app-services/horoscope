@@ -8,7 +8,7 @@ export const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    padding: theme.spacing.md
+    padding: `0px ${theme.spacing.md}px ${theme.spacing.md}px ${theme.spacing.md}px`
   },
 
   container: {
