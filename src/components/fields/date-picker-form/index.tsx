@@ -32,7 +32,7 @@ export const DatePickerForm: FC<IDatePickerFormProps> = ({
       placeholder={placeholder}
       label={label}
       disabled={disabled}
-      defaultValue={form.values.BirthDate}
+      defaultValue={form.values[fieldName]}
       onChange={(value: Date) => form?.setFieldValue(fieldName, value)}
       error={form.errors[fieldName]}
     />

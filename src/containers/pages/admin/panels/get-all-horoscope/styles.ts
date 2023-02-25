@@ -12,13 +12,13 @@ export const useStyles = createStyles((theme) => ({
   },
 
   collapseContainer: {
-    marginBottom: theme.spacing.sm,
+    marginBottom: theme.spacing.xs,
     width: '100%'
   },
 
   collapse: {
     width: '100%',
-    padding: theme.spacing.sm
+    padding: theme.spacing.xs
   },
 
   chevron: {

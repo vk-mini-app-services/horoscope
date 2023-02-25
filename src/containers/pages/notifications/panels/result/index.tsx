@@ -13,7 +13,7 @@ import {
 import { useStyles } from './styles';
 import zodiacCompatibilityResultPhoto from '../../../../../assets/img/zodiac-compatibility/zodiac-compatibility.png';
 import { PhotoResult } from '../../../../../components/generate-photo';
-import { demonicHoroscopeResultForWall } from '../../../../../utils/results-img/demonic-horoscope-result';
+import { compatibilityResultLinkForWall } from '../../../../../utils/results-img/compatibility-result';
 
 const list: IListItem[] = [
   {
@@ -44,13 +44,10 @@ interface IResultPanelProps {
 export const ResultPanel: FC<IResultPanelProps> = observer(
   ({ zodiac, sharingPhotoUrl, zodiacObj }) => {
     const { classes } = useStyles();
-    // const { UserStore } = useStores();
 
     const handleClickMenuItem = useCallback(
       async (event: React.SyntheticEvent<HTMLButtonElement>) => {
         const value = event.currentTarget.dataset.value ?? '';
-
-        // const photo = await getPhoto();
 
         switch (value) {
           case 'send':
@@ -60,7 +57,7 @@ export const ResultPanel: FC<IResultPanelProps> = observer(
             await sharingStory(sharingPhotoUrl);
             break;
           case 'wall':
-            shareWall(event, demonicHoroscopeResultForWall['aries']);
+            shareWall(event, compatibilityResultLinkForWall);
             break;
           case 'copy':
             copyLink();

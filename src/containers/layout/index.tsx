@@ -35,7 +35,7 @@ export const Layout: FC<ILayoutProps> = observer(({ children, prevPage }) => {
       <Header
         title={currentTitle[PanelStore?.activePanel]}
         prevPage={prevPage}
-        iconLeft={<ArrowLeftIcon />}
+        iconLeft={<ArrowLeftIcon fill="white" />}
       />
       {children}
       <Footer />

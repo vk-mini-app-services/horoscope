@@ -24,7 +24,10 @@ export const Admin = () => {
             fullWidth
             radius={8}
             mt={8}
-            sx={{ fontWeight: 500 }}
+            sx={{
+              fontWeight: 500,
+              backgroundColor: activePanel === 'set-horoscope' ? '#0e2942' : ''
+            }}
             onClick={handleActivePanel}
             w="49%"
           >
@@ -36,7 +39,10 @@ export const Admin = () => {
             fullWidth
             radius={8}
             mt={8}
-            sx={{ fontWeight: 500 }}
+            sx={{
+              fontWeight: 500,
+              backgroundColor: activePanel === 'get-all-horoscope' ? '#0e2942' : ''
+            }}
             onClick={handleActivePanel}
             w="49%"
           >
