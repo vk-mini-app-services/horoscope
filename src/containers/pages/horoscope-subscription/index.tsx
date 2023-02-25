@@ -4,19 +4,19 @@ import { observer } from 'mobx-react-lite';
 import { addUserInSubscription } from '../../../api';
 import noty from '../../../assets/img/noty.png';
 import { NAME_PROJECT, USER_ID } from '../../../utils/constants';
+import { useAds } from '../../../utils/hooks/useAds';
 import { Layout } from '../../layout';
 import { useStyles } from './styles';
 
 export const HoroscopeSubscription = observer(() => {
   const { classes } = useStyles();
+  useAds();
 
   const handleClick = async () => {
     const { data } = await addUserInSubscription({
       appName: NAME_PROJECT,
       userId: USER_ID
     });
-
-    console.log('data', data);
 
     if (data && data?.success) {
       showNotification({
@@ -46,8 +46,8 @@ export const HoroscopeSubscription = observer(() => {
           <Text fw={500} size="xl" color="white">
             <span style={{ color: '#D649ED' }}>ежедневный гороскоп</span>, нужно
           </Text>
-          <Text fw={500} size="xl" color="white">
-            подписаться на уведомления.
+          <Text fw={500} size="xl" color="white" ta="center">
+            включить уведомления.
           </Text>
         </Box>
 
@@ -57,7 +57,7 @@ export const HoroscopeSubscription = observer(() => {
 Вам гороскоп по Вашему знаку зодиака.`}
         </Text>
         <Button onClick={handleClick} color="button.0" fullWidth sx={{ fontWeight: 500 }}>
-          Подписаться
+          Включить уведомления
         </Button>
       </Box>
     </Layout>

@@ -1,6 +1,6 @@
 import { Box, Button, Text, Collapse } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
-import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import { IZodiac } from '../../../../../types';
 import { getAllHoroscopes } from '../../../../../api';
@@ -9,15 +9,7 @@ import { zodiacRus } from '../../../../../utils/mock-data/zodiac-signs';
 import { ScrollContainer } from '../../../../../components/scroll-container';
 import { IconChevronUp } from '@tabler/icons';
 
-interface IGetAllHoroscopePanelProps {
-  setActivePanel: Dispatch<SetStateAction<string>>;
-}
-
-interface IGetAllHoroscopePanelProps {
-  setActivePanel: Dispatch<SetStateAction<string>>;
-}
-
-export const GetAllHoroscopePanel: FC<IGetAllHoroscopePanelProps> = observer(() => {
+export const GetAllHoroscopePanel = observer(() => {
   const { classes, theme } = useStyles();
 
   const [list, setList] = useState<IZodiac[]>([]);

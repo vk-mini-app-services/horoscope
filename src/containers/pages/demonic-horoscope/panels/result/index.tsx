@@ -26,6 +26,9 @@ import sagittarius from '../../../../../assets/img/demonic-horoscope/sagittarius
 import capricorn from '../../../../../assets/img/demonic-horoscope/capricorn.png';
 import aquarius from '../../../../../assets/img/demonic-horoscope/aquarius.png';
 import pisces from '../../../../../assets/img/demonic-horoscope/pisces.png';
+import { observer } from 'mobx-react-lite';
+import { useStores } from '../../../../../utils/hooks/useStores';
+import { addGroup, subscribeMessageFromGroup } from '../../../../../utils/vk/bridge-methods';
 
 const list: IListItem[] = [
   {
@@ -66,29 +69,43 @@ interface IResultPanelProps {
   zodiac: string;
 }
 
-export const ResultPanel: FC<IResultPanelProps> = ({ zodiac }) => {
+export const ResultPanel: FC<IResultPanelProps> = observer(({ zodiac }) => {
   const { classes } = useStyles();
+  const { UserStore } = useStores();
 
-  const handleClickMenuItem = useCallback((event: React.SyntheticEvent<HTMLButtonElement>) => {
-    const value = event.currentTarget.dataset.value ?? '';
-
-    switch (value) {
-      case 'send':
-        shareLink();
-        break;
-      case 'stories':
-        sharingStory(demonicHoroscopeResult[zodiac]);
-        break;
-      case 'wall':
-        shareWall(event, demonicHoroscopeResultForWall[zodiac]);
-        break;
-      case 'copy':
-        copyLink();
-        break;
-      default:
-        break;
+  const handleButtonClick = async () => {
+    if (UserStore?.groups?.subGroup) {
+      await addGroup(UserStore.groups.subGroup);
     }
-  }, []);
+
+    if (UserStore?.groups?.mailGroup) {
+      await subscribeMessageFromGroup(UserStore?.groups?.mailGroup);
+    }
+  };
+
+  const handleClickMenuItem = useCallback(
+    async (event: React.SyntheticEvent<HTMLButtonElement>) => {
+      const value = event.currentTarget.dataset.value ?? '';
+
+      switch (value) {
+        case 'send':
+          shareLink();
+          break;
+        case 'stories':
+          sharingStory(demonicHoroscopeResult[zodiac]);
+          break;
+        case 'wall':
+          shareWall(event, demonicHoroscopeResultForWall[zodiac]);
+          break;
+        case 'copy':
+          copyLink();
+          break;
+        default:
+          break;
+      }
+    },
+    []
+  );
 
   return (
     <Box className={classes.container}>
@@ -109,6 +126,7 @@ export const ResultPanel: FC<IResultPanelProps> = ({ zodiac }) => {
             radius={8}
             mt={8}
             sx={{ fontWeight: 500 }}
+            onClick={handleButtonClick}
           >
             Поделиться результатом
           </Button>
@@ -116,4 +134,4 @@ export const ResultPanel: FC<IResultPanelProps> = ({ zodiac }) => {
       </Box>
     </Box>
   );
-};
+});

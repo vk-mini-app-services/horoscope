@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import { Layout } from '../../layout';
 import { GetAllHoroscopePanel } from './panels/get-all-horoscope';
 import { SetHoroscopePanel } from './panels/set-horoscope';
+import { SetPayloadPanel } from './panels/set-payload';
 import { useStyles } from './styles';
 
 export const Admin = () => {
@@ -26,10 +27,10 @@ export const Admin = () => {
             mt={8}
             sx={{
               fontWeight: 500,
-              backgroundColor: activePanel === 'set-horoscope' ? '#0e2942' : ''
+              backgroundColor: activePanel === 'get-all-horoscope' ? '' : '#0e2942'
             }}
             onClick={handleActivePanel}
-            w="49%"
+            w="32%"
           >
             Гороскопы по дням
           </Button>
@@ -41,19 +42,33 @@ export const Admin = () => {
             mt={8}
             sx={{
               fontWeight: 500,
-              backgroundColor: activePanel === 'get-all-horoscope' ? '#0e2942' : ''
+              backgroundColor: activePanel === 'set-horoscope' ? '' : '#0e2942'
             }}
             onClick={handleActivePanel}
-            w="49%"
+            w="32%"
           >
             Установить гороскоп
           </Button>
+          <Button
+            data-value="set-payload"
+            color="button.0"
+            fullWidth
+            radius={8}
+            mt={8}
+            sx={{
+              fontWeight: 500,
+              backgroundColor: activePanel === 'set-payload' ? '' : '#0e2942'
+            }}
+            onClick={handleActivePanel}
+            w="32%"
+          >
+            Установить ссылки
+          </Button>
         </Box>
 
-        {activePanel === 'get-all-horoscope' && (
-          <GetAllHoroscopePanel setActivePanel={setActivePanel} />
-        )}
+        {activePanel === 'get-all-horoscope' && <GetAllHoroscopePanel />}
         {activePanel === 'set-horoscope' && <SetHoroscopePanel />}
+        {activePanel === 'set-payload' && <SetPayloadPanel />}
       </Box>
     </Layout>
   );

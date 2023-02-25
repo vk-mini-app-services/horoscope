@@ -12,6 +12,8 @@ import { DatePickerForm } from '../../../../../components/fields/date-picker-for
 import { TextareaField } from '../../../../../components/fields/textarea-field';
 import { z } from 'zod';
 import { getValidateErrors } from '../../../../../utils/validation';
+import { useStores } from '../../../../../utils/hooks/useStores';
+import { toJS } from 'mobx';
 
 const today = new Date();
 const yesterday = new Date(today.getTime());
@@ -40,6 +42,10 @@ const dataForm: IZodiacInitForm = {
 export const SetHoroscopePanel = observer(() => {
   const { classes } = useStyles();
   const [datePickerKey, setDatePickerKey] = useState<number>(0);
+
+  const { UserStore } = useStores();
+
+  console.log('UserStore', toJS(UserStore.groups));
 
   const form = useForm({
     initialValues: dataForm,

@@ -1,15 +1,27 @@
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
-// import { useEffect } from 'react';
-// import { addApp } from './api';
+import { useEffect } from 'react';
+import { getPayload } from './api';
 import { MainRoutes } from './containers/routes';
 import { theme } from './theme/global-theme';
-// import { NAME_PROJECT } from './utils/constants';
+import { useStores } from './utils/hooks/useStores';
 
 const App = () => {
-  // useEffect(() => {
-  //   addApp(NAME_PROJECT);
-  // }, []);
+  const { UserStore } = useStores();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await getPayload();
+
+        if (data && data.success) {
+          UserStore.setGroups(data.message);
+        }
+      } catch (e) {
+        console.warn('getPayload ERR', e);
+      }
+    })();
+  }, []);
 
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>

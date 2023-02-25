@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { IZodiac } from '../../../types';
+import { useAds } from '../../../utils/hooks/useAds';
 import { Layout } from '../../layout';
 import { ResultPanel } from './panels/result';
 import { SelectPanel } from './panels/select';
@@ -9,6 +10,8 @@ export const Notifications = () => {
   const [zodiac, setZodiac] = useState<string>('');
   const [sharingPhotoUrl, setSharingPhotoUrl] = useState<string>('');
   const [zodiacObj, setZodiacObj] = useState<IZodiac | null>(null);
+
+  useAds();
 
   return (
     <Layout>

@@ -1,10 +1,11 @@
 import { observable, action, makeObservable } from 'mobx';
-import { IUserInfo } from './types/UserStoreType';
+import { IGroups, IUserInfo } from './types/UserStoreType';
 
 export class UserStore {
   loading = false;
   userInfo: IUserInfo | null = null;
   token = '';
+  groups: IGroups | null = null;
 
   setUserInfo = (data: IUserInfo) => {
     this.userInfo = data;
@@ -14,9 +15,14 @@ export class UserStore {
     this.token = token;
   };
 
+  setGroups = (data: IGroups) => {
+    this.groups = data;
+  };
+
   resetStore = () => {
     this.loading = false;
     this.userInfo = null;
+    this.groups = null;
   };
 
   constructor() {
@@ -24,9 +30,11 @@ export class UserStore {
       loading: observable,
       userInfo: observable,
       token: observable,
+      groups: observable,
       resetStore: action,
       setUserInfo: action,
-      setUserToken: action
+      setUserToken: action,
+      setGroups: action
     });
   }
 }

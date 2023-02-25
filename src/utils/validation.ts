@@ -18,6 +18,9 @@ export const loginRegExp =
   /^(?:[a-zA-Z0-9_*\-*.*]+@[a-zA-Z0-9\-*]+\.*[A-Za-z.*\-*]*\.[A-Za-z]+|(?:8|\+7)[- ]?(?:\(?[0-9]{3}\)?[- ]?)?[0-9\- ]{7,10})$/;
 export const loginRegExpErrorText = `Неверный логин. Должен быть в формате адреса электронной почты "example@email.com" или номера телефона, состоящего из 7-10 цифр, может включать в себя символы '-', '(', ')', '+7' или '8'`;
 
+export const numberRegExp = /^\d+$/;
+export const numberRegExpErrorText = `Используйте ццифры`;
+
 export const getValidateErrors = (validateScheme: ZodObject<any, any>, values: object) => {
   const res = validateScheme.safeParse(values);
   if (!res.success) {

@@ -27,8 +27,8 @@ export const getUserToken = async (scope: string) => {
 };
 
 // разрешение на отправку сообщений от имени группы
-export function subscribeMessageFromGroup(groupIDsubscription: number) {
-  bridge
+export const subscribeMessageFromGroup = async (groupIDsubscription: number) => {
+  return await bridge
     .send('VKWebAppAllowMessagesFromGroup', {
       group_id: groupIDsubscription
     })
@@ -38,11 +38,11 @@ export function subscribeMessageFromGroup(groupIDsubscription: number) {
     .catch((err) => {
       console.log('VKWebAppAllowMessagesFromGroup ERR', err);
     });
-}
+};
 
 // подписка на группу
-export async function addGroup(groupId: number) {
-  bridge
+export const addGroup = async (groupId: number) => {
+  return await bridge
     .send('VKWebAppJoinGroup', { group_id: groupId })
     .then(({ result }) => {
       console.log('VKWebAppJoinGroup RES', result);
@@ -50,7 +50,7 @@ export async function addGroup(groupId: number) {
     .catch((err) => {
       console.log('VKWebAppJoinGroup RES', err);
     });
-}
+};
 
 // добавление сервиса в сообщество
 export function AddToCommunity() {

@@ -12,6 +12,7 @@ interface ITextFieldProps {
   disabled?: boolean;
   clearable?: boolean;
   rightSection?: ReactNode;
+  placeholder?: string;
 }
 
 export const TextFieldInput: FC<ITextFieldProps> = ({
@@ -21,7 +22,8 @@ export const TextFieldInput: FC<ITextFieldProps> = ({
   disabled,
   label,
   clearable,
-  rightSection
+  rightSection,
+  placeholder
 }) => {
   const { classes, cx } = useStyles();
 
@@ -45,6 +47,7 @@ export const TextFieldInput: FC<ITextFieldProps> = ({
     <TextInput
       className={cx(classes.textFieldInput, className)}
       label={label}
+      placeholder={placeholder}
       disabled={disabled}
       rightSection={rightSectionRender()}
       {...form.getInputProps(fieldName)}

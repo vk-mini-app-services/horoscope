@@ -2,7 +2,7 @@ import bridge, { EAdsFormats } from '@vkontakte/vk-bridge';
 
 // открытие рекламного ролика
 export const nativeAds = async () => {
-  return bridge
+  return await bridge
     .send('VKWebAppShowNativeAds', {
       ad_format: EAdsFormats.REWARD
     })

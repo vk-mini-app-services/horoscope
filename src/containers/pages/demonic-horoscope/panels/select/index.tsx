@@ -33,7 +33,7 @@ export const SelectPanel: FC<ISelectPanelProps> = ({ setActivePanel, setZodiac, 
           </Text>
           <Text color="#4C6283">
             Зная своего демона, можно лучше понять и принять свою темную сторону, а также научится
-            договориться с ним.
+            договариваться с ним.
           </Text>
         </Box>
 
