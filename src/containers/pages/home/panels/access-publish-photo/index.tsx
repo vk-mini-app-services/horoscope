@@ -53,7 +53,7 @@ export const AccessPanel: FC<IAccessPanelProps> = observer(({ setActivePanel }) 
       if (token && UserStore.userInfo) {
         UserStore.setUserToken(token);
 
-        const currentZodiacByUserBirthDate = getZodiacSign(UserStore?.userInfo?.bdate ?? '');
+        const currentZodiacByUserBirthDate = await getZodiacSign(UserStore?.userInfo?.bdate ?? '');
 
         // TODO: ЗАменить дефолтное фото.
         const photo = currentZodiacByUserBirthDate

@@ -1,6 +1,6 @@
 import { ZodiacSignEnum } from '../../types/enums';
 
-export const getZodiacSign = (dateString: string): string => {
+export const getZodiacSign = async (dateString: string): Promise<string> => {
   if (!dateString) {
     return '';
   }
