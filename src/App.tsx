@@ -1,5 +1,6 @@
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
+import bridge from '@vkontakte/vk-bridge';
 import { useEffect } from 'react';
 import { getPayload } from './api';
 import { MainRoutes } from './containers/routes';
@@ -20,6 +21,11 @@ const App = () => {
       } catch (e) {
         console.warn('getPayload ERR', e);
       }
+
+      const user = await bridge.send('VKWebAppGetUserInfo');
+      console.log('user', user);
+
+      UserStore.setUserInfo(user);
     })();
   }, []);
 

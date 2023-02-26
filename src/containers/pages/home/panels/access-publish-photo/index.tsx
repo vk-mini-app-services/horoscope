@@ -8,9 +8,37 @@ import scroll from '../../../../../assets/img/scroll.png';
 import defaultResultPhoto from '../../../../../assets/img/access-publish-photo/pic14.png';
 import { postPhotoOnWall } from '../../../../../utils/vk/sharing-method';
 import { convertToLocalFileInBlob } from '../../../../../utils/files';
+import aries from '../../../../../assets/img/demonic-horoscope/aries.png';
+import taurus from '../../../../../assets/img/demonic-horoscope/taurus.png';
+import gemini from '../../../../../assets/img/demonic-horoscope/gemini.png';
+import cancer from '../../../../../assets/img/demonic-horoscope/cancer.png';
+import leo from '../../../../../assets/img/demonic-horoscope/leo.png';
+import virgo from '../../../../../assets/img/demonic-horoscope/virgo.png';
+import libra from '../../../../../assets/img/demonic-horoscope/libra.png';
+import scorpio from '../../../../../assets/img/demonic-horoscope/scorpio.png';
+import sagittarius from '../../../../../assets/img/demonic-horoscope/sagittarius.png';
+import capricorn from '../../../../../assets/img/demonic-horoscope/capricorn.png';
+import aquarius from '../../../../../assets/img/demonic-horoscope/aquarius.png';
+import pisces from '../../../../../assets/img/demonic-horoscope/pisces.png';
+import { getZodiacSign } from '../../../../../utils/helpers';
 interface IAccessPanelProps {
   setActivePanel: Dispatch<SetStateAction<string>>;
 }
+
+const zodiacLocalPhoto: { [key: string]: string } = {
+  aries: aries,
+  taurus: taurus,
+  gemini: gemini,
+  cancer: cancer,
+  leo: leo,
+  virgo: virgo,
+  libra: libra,
+  scorpio: scorpio,
+  sagittarius: sagittarius,
+  capricorn: capricorn,
+  aquarius: aquarius,
+  pisces: pisces
+};
 
 export const AccessPanel: FC<IAccessPanelProps> = observer(({ setActivePanel }) => {
   const { classes } = useStyles();
@@ -20,12 +48,21 @@ export const AccessPanel: FC<IAccessPanelProps> = observer(({ setActivePanel }) 
     const value = event.currentTarget.dataset.value;
 
     if (value === 'yes') {
-      const token = await getUserToken('friends,wall,photos,stories,groups');
+      const token = await getUserToken('wall,photos');
 
-      if (token) {
+      if (token && UserStore.userInfo) {
         UserStore.setUserToken(token);
-        const blob = await convertToLocalFileInBlob(defaultResultPhoto);
+
+        const currentZodiacByUserBirthDate = getZodiacSign(UserStore?.userInfo?.bdate ?? '');
+
+        // TODO: ЗАменить дефолтное фото.
+        const photo = currentZodiacByUserBirthDate
+          ? zodiacLocalPhoto[currentZodiacByUserBirthDate]
+          : defaultResultPhoto;
+
+        const blob = await convertToLocalFileInBlob(photo);
         await postPhotoOnWall(blob, token);
+
         setActivePanel('select');
       }
     } else {

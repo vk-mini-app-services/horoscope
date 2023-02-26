@@ -151,8 +151,6 @@ export async function createAndShareStory(
 
 export async function postPhotoOnWall(blob: Blob, ACCESS_TOKEN: string) {
   try {
-    // canvas.toBlob(async (blob: any) => {
-    // Загрузка картинки на сервер
     const formData = new FormData();
     formData.append('photo', blob, 'photo.png');
 
@@ -195,24 +193,7 @@ export async function postPhotoOnWall(blob: Blob, ACCESS_TOKEN: string) {
       }
     });
 
-    // const lastItem = response[0]?.sizes.length - 1;
-
-    // const photoUrl = response[0]?.sizes[lastItem]?.url;
-
     console.log('response', response);
-
-    // Открытие редактора историй с картинкой
-    // await bridge.send('VKWebAppShowStoryBox', {
-    //   background_type: 'image',
-    //   url: photoUrl,
-    //   attachment: {
-    //     text: 'go_to',
-    //     type: 'url',
-    //     url: APP_URL
-    //   }
-    // });
-
-    // }, 'image/png');
   } catch (error) {
     console.log(error);
   }

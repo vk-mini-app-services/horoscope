@@ -1,13 +1,14 @@
+import { UserInfo } from '@vkontakte/vk-bridge';
 import { observable, action, makeObservable } from 'mobx';
-import { IGroups, IUserInfo } from './types/UserStoreType';
+import { IGroups } from './types/UserStoreType';
 
 export class UserStore {
   loading = false;
-  userInfo: IUserInfo | null = null;
+  userInfo: UserInfo | null = null;
   token = '';
   groups: IGroups | null = null;
 
-  setUserInfo = (data: IUserInfo) => {
+  setUserInfo = (data: UserInfo) => {
     this.userInfo = data;
   };
 
