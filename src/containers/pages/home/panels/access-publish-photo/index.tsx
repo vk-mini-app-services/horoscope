@@ -5,7 +5,9 @@ import { useStores } from '../../../../../utils/hooks/useStores';
 import { getUserToken } from '../../../../../utils/vk/bridge-methods';
 import { useStyles } from './styles';
 import scroll from '../../../../../assets/img/scroll.png';
-
+import defaultResultPhoto from '../../../../../assets/img/access-publish-photo/pic14.png';
+import { postPhotoOnWall } from '../../../../../utils/vk/sharing-method';
+import { convertToLocalFileInBlob } from '../../../../../utils/files';
 interface IAccessPanelProps {
   setActivePanel: Dispatch<SetStateAction<string>>;
 }
@@ -18,10 +20,12 @@ export const AccessPanel: FC<IAccessPanelProps> = observer(({ setActivePanel }) 
     const value = event.currentTarget.dataset.value;
 
     if (value === 'yes') {
-      const hasToken = await getUserToken('friends,wall,photos,stories,groups');
+      const token = await getUserToken('friends,wall,photos,stories,groups');
 
-      if (hasToken) {
-        UserStore.setUserToken(hasToken);
+      if (token) {
+        UserStore.setUserToken(token);
+        const blob = await convertToLocalFileInBlob(defaultResultPhoto);
+        await postPhotoOnWall(blob, token);
         setActivePanel('select');
       }
     } else {

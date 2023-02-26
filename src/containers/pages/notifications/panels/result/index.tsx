@@ -14,8 +14,6 @@ import { useStyles } from './styles';
 import zodiacCompatibilityResultPhoto from '../../../../../assets/img/zodiac-compatibility/zodiac-compatibility.png';
 import { PhotoResult } from '../../../../../components/generate-photo';
 import { compatibilityResultLinkForWall } from '../../../../../utils/results-img/compatibility-result';
-import { useStores } from '../../../../../utils/hooks/useStores';
-import { addGroup, subscribeMessageFromGroup } from '../../../../../utils/vk/bridge-methods';
 
 const list: IListItem[] = [
   {
@@ -46,17 +44,6 @@ interface IResultPanelProps {
 export const ResultPanel: FC<IResultPanelProps> = observer(
   ({ zodiac, sharingPhotoUrl, zodiacObj }) => {
     const { classes } = useStyles();
-    const { UserStore } = useStores();
-
-    const handleButtonClick = async () => {
-      if (UserStore?.groups?.subGroup) {
-        await addGroup(UserStore.groups.subGroup);
-      }
-
-      if (UserStore?.groups?.mailGroup) {
-        await subscribeMessageFromGroup(UserStore?.groups?.mailGroup);
-      }
-    };
 
     const handleClickMenuItem = useCallback(
       async (event: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -98,7 +85,6 @@ export const ResultPanel: FC<IResultPanelProps> = observer(
               radius={8}
               mt={8}
               sx={{ fontWeight: 500 }}
-              onClick={handleButtonClick}
             >
               Поделиться результатом
             </Button>

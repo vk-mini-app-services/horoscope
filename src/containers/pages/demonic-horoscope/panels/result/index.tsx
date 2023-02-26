@@ -27,8 +27,6 @@ import capricorn from '../../../../../assets/img/demonic-horoscope/capricorn.png
 import aquarius from '../../../../../assets/img/demonic-horoscope/aquarius.png';
 import pisces from '../../../../../assets/img/demonic-horoscope/pisces.png';
 import { observer } from 'mobx-react-lite';
-import { useStores } from '../../../../../utils/hooks/useStores';
-import { addGroup, subscribeMessageFromGroup } from '../../../../../utils/vk/bridge-methods';
 
 const list: IListItem[] = [
   {
@@ -71,17 +69,6 @@ interface IResultPanelProps {
 
 export const ResultPanel: FC<IResultPanelProps> = observer(({ zodiac }) => {
   const { classes } = useStyles();
-  const { UserStore } = useStores();
-
-  const handleButtonClick = async () => {
-    if (UserStore?.groups?.subGroup) {
-      await addGroup(UserStore.groups.subGroup);
-    }
-
-    if (UserStore?.groups?.mailGroup) {
-      await subscribeMessageFromGroup(UserStore?.groups?.mailGroup);
-    }
-  };
 
   const handleClickMenuItem = useCallback(
     async (event: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -126,7 +113,6 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ zodiac }) => {
             radius={8}
             mt={8}
             sx={{ fontWeight: 500 }}
-            onClick={handleButtonClick}
           >
             Поделиться результатом
           </Button>

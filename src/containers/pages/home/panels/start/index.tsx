@@ -29,7 +29,7 @@ export const StartPanel: FC<IStartPanelProps> = observer(({ setActivePanel }) =>
           Привет!
         </Text>
         <Text fw={500} size="xl" color="white">
-          Это тематические приложение с гороскопами.
+          Это тематическое приложение с гороскопами.
         </Text>
       </Box>
 

@@ -32,7 +32,7 @@ export const Admin = () => {
             onClick={handleActivePanel}
             w="32%"
           >
-            Гороскопы по дням
+            Гороскопы
           </Button>
           <Button
             data-value="set-horoscope"

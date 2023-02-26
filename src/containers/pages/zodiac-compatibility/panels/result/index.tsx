@@ -24,8 +24,6 @@ import {
   compatibilityResultLink,
   compatibilityResultLinkForWall
 } from '../../../../../utils/results-img/compatibility-result';
-import { useStores } from '../../../../../utils/hooks/useStores';
-import { addGroup, subscribeMessageFromGroup } from '../../../../../utils/vk/bridge-methods';
 
 const list: IListItem[] = [
   {
@@ -55,18 +53,6 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ generalZodiac }) =
   const { classes } = useStyles();
 
   const [sharingPhotoUrl, setSharingPhotoUrl] = useState<string>('');
-
-  const { UserStore } = useStores();
-
-  const handleButtonClick = async () => {
-    if (UserStore?.groups?.subGroup) {
-      await addGroup(UserStore.groups.subGroup);
-    }
-
-    if (UserStore?.groups?.mailGroup) {
-      await subscribeMessageFromGroup(UserStore?.groups?.mailGroup);
-    }
-  };
 
   const handleClickMenuItem = useCallback(
     async (event: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -128,7 +114,6 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ generalZodiac }) =
             radius={8}
             mt={8}
             sx={{ fontWeight: 500 }}
-            onClick={handleButtonClick}
           >
             Поделиться результатом
           </Button>

@@ -7,6 +7,12 @@ export const convertToLocalFile = async (link: string): Promise<File> => {
   return file;
 };
 
+export const convertToLocalFileInBlob = async (link: string): Promise<Blob> => {
+  const response = await fetch(link);
+  const blob = await response.blob();
+  return blob;
+};
+
 export const blobToBase64 = async (blob: Blob) => {
   return await new Promise((resolve) => {
     const reader = new FileReader();

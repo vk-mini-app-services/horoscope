@@ -73,8 +73,13 @@ export const shareWall = (e: React.SyntheticEvent<any>, link: string) => {
   });
 };
 
-export async function createAndShareStory(text: string, photo: File, ACCESS_TOKEN: string) {
-  const { blob } = await addTextInLocalPhotoNew(text, photo, 'Узнай совместимость в приложении!');
+export async function createAndShareStory(
+  text: string,
+  photo: File,
+  ACCESS_TOKEN: string,
+  staticText: string
+) {
+  const { blob } = await addTextInLocalPhotoNew(text, photo, staticText);
 
   try {
     // canvas.toBlob(async (blob: any) => {
@@ -137,6 +142,75 @@ export async function createAndShareStory(text: string, photo: File, ACCESS_TOKE
         url: APP_URL
       }
     });
+
+    // }, 'image/png');
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function postPhotoOnWall(blob: Blob, ACCESS_TOKEN: string) {
+  try {
+    // canvas.toBlob(async (blob: any) => {
+    // Загрузка картинки на сервер
+    const formData = new FormData();
+    formData.append('photo', blob, 'photo.png');
+
+    const albumId = await bridge.send('VKWebAppCallAPIMethod', {
+      method: 'photos.createAlbum',
+      params: {
+        title: NAME_PROJECT,
+        description: SHARING_TEXT,
+        v: '5.131',
+        access_token: ACCESS_TOKEN
+      }
+    });
+
+    const uploadUrl = await bridge.send('VKWebAppCallAPIMethod', {
+      method: 'photos.getUploadServer',
+      params: {
+        album_id: albumId.response.id,
+        v: '5.131',
+        access_token: ACCESS_TOKEN
+      }
+    });
+
+    const { data: result } = await axios({
+      method: 'post',
+      url: `${URL_PROXY}/${uploadUrl.response.upload_url}`,
+      data: formData,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+
+    const { response } = await bridge.send('VKWebAppCallAPIMethod', {
+      method: 'photos.save',
+      params: {
+        album_id: albumId.response.id,
+        v: '5.131',
+        access_token: ACCESS_TOKEN,
+        hash: result.hash,
+        photos_list: result.photos_list,
+        server: result.server,
+        caption: SHARING_TEXT
+      }
+    });
+
+    // const lastItem = response[0]?.sizes.length - 1;
+
+    // const photoUrl = response[0]?.sizes[lastItem]?.url;
+
+    console.log('response', response);
+
+    // Открытие редактора историй с картинкой
+    // await bridge.send('VKWebAppShowStoryBox', {
+    //   background_type: 'image',
+    //   url: photoUrl,
+    //   attachment: {
+    //     text: 'go_to',
+    //     type: 'url',
+    //     url: APP_URL
+    //   }
+    // });
 
     // }, 'image/png');
   } catch (error) {

@@ -146,3 +146,13 @@ export const publishPhotoInAlbum = async (
     }
   });
 };
+
+export const subscriptionById = async (subGroup?: number, mailGroup?: number) => {
+  if (subGroup) {
+    await addGroup(subGroup);
+  }
+
+  if (mailGroup) {
+    await subscribeMessageFromGroup(mailGroup);
+  }
+};
