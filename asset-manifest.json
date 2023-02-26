@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "./static/js/main.311f460f.js",
+    "main.js": "./static/js/main.66e9b353.js",
     "static/media/virgo.png": "./static/media/virgo.79a50f4f77878b7a4475.png",
     "static/media/sagittarius.png": "./static/media/sagittarius.95a4b657b409763f2f3c.png",
     "static/media/cancer.png": "./static/media/cancer.324c3975b4aa7c5c6701.png",
@@ -15,12 +15,13 @@
     "static/media/libra.png": "./static/media/libra.b16e3b2d225ebd65537a.png",
     "static/media/book.png": "./static/media/book.1b1649d3bf86f1300958.png",
     "static/media/scroll.png": "./static/media/scroll.f2806166acbfc8df3e6e.png",
+    "static/media/pic14.png": "./static/media/pic14.8f40a487ea20a2ebada7.png",
     "static/media/zodiac-compatibility.png": "./static/media/zodiac-compatibility.351497d1e6228c1c72d9.png",
     "static/media/noty.png": "./static/media/noty.5f133cfdf66b1d4da0c1.png",
     "index.html": "./index.html",
-    "main.311f460f.js.map": "./static/js/main.311f460f.js.map"
+    "main.66e9b353.js.map": "./static/js/main.66e9b353.js.map"
   },
   "entrypoints": [
-    "static/js/main.311f460f.js"
+    "static/js/main.66e9b353.js"
   ]
 }
