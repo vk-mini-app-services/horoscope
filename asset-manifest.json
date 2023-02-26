@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "./static/js/main.46cbdc43.js",
+    "main.js": "./static/js/main.334cfb39.js",
     "static/media/virgo.png": "./static/media/virgo.79a50f4f77878b7a4475.png",
     "static/media/sagittarius.png": "./static/media/sagittarius.95a4b657b409763f2f3c.png",
     "static/media/cancer.png": "./static/media/cancer.324c3975b4aa7c5c6701.png",
@@ -19,9 +19,9 @@
     "static/media/zodiac-compatibility.png": "./static/media/zodiac-compatibility.351497d1e6228c1c72d9.png",
     "static/media/noty.png": "./static/media/noty.5f133cfdf66b1d4da0c1.png",
     "index.html": "./index.html",
-    "main.46cbdc43.js.map": "./static/js/main.46cbdc43.js.map"
+    "main.334cfb39.js.map": "./static/js/main.334cfb39.js.map"
   },
   "entrypoints": [
-    "static/js/main.46cbdc43.js"
+    "static/js/main.334cfb39.js"
   ]
 }
