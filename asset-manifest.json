@@ -1,27 +1,28 @@
 {
   "files": {
-    "main.js": "./static/js/main.b92a696e.js",
-    "static/media/virgo.png": "./static/media/virgo.79a50f4f77878b7a4475.png",
-    "static/media/sagittarius.png": "./static/media/sagittarius.95a4b657b409763f2f3c.png",
-    "static/media/cancer.png": "./static/media/cancer.324c3975b4aa7c5c6701.png",
-    "static/media/gemini.png": "./static/media/gemini.857d5ca7d46d590da8a1.png",
-    "static/media/leo.png": "./static/media/leo.602b639d429102674d66.png",
-    "static/media/taurus.png": "./static/media/taurus.e35eb23a0e34b303a6e1.png",
-    "static/media/scorpio.png": "./static/media/scorpio.843a72613b8843eb0fa6.png",
-    "static/media/capricorn.png": "./static/media/capricorn.824dafe250e822d553fe.png",
-    "static/media/pisces.png": "./static/media/pisces.6d4c9e5f600f2c7d15cd.png",
-    "static/media/aries.png": "./static/media/aries.15d46a5e2db675379fb5.png",
-    "static/media/aquarius.png": "./static/media/aquarius.f305043f9e2c4763761f.png",
-    "static/media/libra.png": "./static/media/libra.b16e3b2d225ebd65537a.png",
+    "main.js": "./static/js/main.7fb81021.js",
+    "static/media/pic15.png": "./static/media/pic15.398f9957cd980cb2e30d.png",
+    "static/media/virgo.png": "./static/media/virgo.6c118ebb5e5fcd4b3223.png",
+    "static/media/sagittarius.png": "./static/media/sagittarius.cc7fa2acba142b68a271.png",
+    "static/media/cancer.png": "./static/media/cancer.1d347a15236c2c40ddbb.png",
+    "static/media/gemini.png": "./static/media/gemini.85f0054354104d3b6b8e.png",
+    "static/media/leo.png": "./static/media/leo.a4f17bba7ca631de65a1.png",
+    "static/media/taurus.png": "./static/media/taurus.34b7e4eca093494318a9.png",
+    "static/media/scorpio.png": "./static/media/scorpio.4d2c7571a1e8c2e78640.png",
+    "static/media/capricorn.png": "./static/media/capricorn.b3588355e5e1496eb6ec.png",
+    "static/media/pisces.png": "./static/media/pisces.5fa8babfc1b2be754962.png",
+    "static/media/aries.png": "./static/media/aries.05cb332f26f421c4f114.png",
+    "static/media/aquarius.png": "./static/media/aquarius.e4d475b6d514755113bf.png",
+    "static/media/libra.png": "./static/media/libra.f68e0978257fe2b45346.png",
     "static/media/book.png": "./static/media/book.1b1649d3bf86f1300958.png",
     "static/media/scroll.png": "./static/media/scroll.f2806166acbfc8df3e6e.png",
-    "static/media/pic14.png": "./static/media/pic14.8f40a487ea20a2ebada7.png",
+    "static/media/zodiac-res.png": "./static/media/zodiac-res.80b4df2ffee62ecb0fe9.png",
     "static/media/zodiac-compatibility.png": "./static/media/zodiac-compatibility.351497d1e6228c1c72d9.png",
     "static/media/noty.png": "./static/media/noty.5f133cfdf66b1d4da0c1.png",
     "index.html": "./index.html",
-    "main.b92a696e.js.map": "./static/js/main.b92a696e.js.map"
+    "main.7fb81021.js.map": "./static/js/main.7fb81021.js.map"
   },
   "entrypoints": [
-    "static/js/main.b92a696e.js"
+    "static/js/main.7fb81021.js"
   ]
 }
