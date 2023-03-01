@@ -7,6 +7,7 @@ export class UserStore {
   userInfo: UserInfo | null = null;
   token = '';
   groups: IGroups | null = null;
+  platform: string | null = null;
 
   setUserInfo = (data: UserInfo) => {
     this.userInfo = data;
@@ -18,6 +19,10 @@ export class UserStore {
 
   setGroups = (data: IGroups) => {
     this.groups = data;
+  };
+
+  setPlatform = (platform: string | null) => {
+    this.platform = platform;
   };
 
   resetStore = () => {
@@ -32,10 +37,12 @@ export class UserStore {
       userInfo: observable,
       token: observable,
       groups: observable,
+      platform: observable,
       resetStore: action,
       setUserInfo: action,
       setUserToken: action,
-      setGroups: action
+      setGroups: action,
+      setPlatform: action
     });
   }
 }

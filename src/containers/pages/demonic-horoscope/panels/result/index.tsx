@@ -1,5 +1,5 @@
 import { Box, Button, Image } from '@mantine/core';
-import { Dispatch, FC, SetStateAction, useCallback } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { DropdownMenu } from '../../../../../components/dropdown-menu';
 import { IListItem } from '../../../../../types';
 import { PagesEnum } from '../../../../../types/enums';
@@ -11,7 +11,8 @@ import {
   copyLink,
   shareWall,
   shareLink,
-  sharingStory
+  sharingStory,
+  postPhotoOnWall
 } from '../../../../../utils/vk/sharing-method';
 import { useStyles } from './styles';
 import aries from '../../../../../assets/img/demonic-horoscope/aries.png';
@@ -27,6 +28,20 @@ import capricorn from '../../../../../assets/img/demonic-horoscope/capricorn.png
 import aquarius from '../../../../../assets/img/demonic-horoscope/aquarius.png';
 import pisces from '../../../../../assets/img/demonic-horoscope/pisces.png';
 import { observer } from 'mobx-react-lite';
+import { useStores } from '../../../../../utils/hooks/useStores';
+import { getUserPlatform } from '../../../../../utils/vk/bridge-methods';
+import ariesWeb from '../../../../../assets/img/demonic-horoscope/desktop/aries.png';
+import taurusWeb from '../../../../../assets/img/demonic-horoscope/desktop/taurus.png';
+import geminiWeb from '../../../../../assets/img/demonic-horoscope/desktop/gemini.png';
+import cancerWeb from '../../../../../assets/img/demonic-horoscope/desktop/cancer.png';
+import leoWeb from '../../../../../assets/img/demonic-horoscope/desktop/leo.png';
+import virgoWeb from '../../../../../assets/img/demonic-horoscope/desktop/virgo.png';
+import libraWeb from '../../../../../assets/img/demonic-horoscope/desktop/libra.png';
+import scorpioWeb from '../../../../../assets/img/demonic-horoscope/desktop/scorpio.png';
+import sagittariusWeb from '../../../../../assets/img/demonic-horoscope/desktop/sagittarius.png';
+import capricornWeb from '../../../../../assets/img/demonic-horoscope/desktop/capricorn.png';
+import aquariusWeb from '../../../../../assets/img/demonic-horoscope/desktop/aquarius.png';
+import piscesWeb from '../../../../../assets/img/demonic-horoscope/desktop/pisces.png';
 
 const list: IListItem[] = [
   {
@@ -44,6 +59,10 @@ const list: IListItem[] = [
   {
     label: 'Копировать ссылку',
     value: 'copy'
+  },
+  {
+    label: 'Опубликовать на стене',
+    value: 'wall-fast'
   }
 ];
 
@@ -62,6 +81,21 @@ const zodiacLocalPhoto: { [key: string]: string } = {
   pisces: pisces
 };
 
+const zodiacLocalPhotoWeb: { [key: string]: string } = {
+  aries: ariesWeb,
+  taurus: taurusWeb,
+  gemini: geminiWeb,
+  cancer: cancerWeb,
+  leo: leoWeb,
+  virgo: virgoWeb,
+  libra: libraWeb,
+  scorpio: scorpioWeb,
+  sagittarius: sagittariusWeb,
+  capricorn: capricornWeb,
+  aquarius: aquariusWeb,
+  pisces: piscesWeb
+};
+
 interface IResultPanelProps {
   setActivePanel: Dispatch<SetStateAction<string>>;
   zodiac: string;
@@ -69,6 +103,10 @@ interface IResultPanelProps {
 
 export const ResultPanel: FC<IResultPanelProps> = observer(({ zodiac }) => {
   const { classes } = useStyles();
+  const { UserStore } = useStores();
+  const [platform, setPlatform] = useState<string | null>();
+
+  const resultImg = platform === 'web' ? zodiacLocalPhotoWeb[zodiac] : zodiacLocalPhoto[zodiac];
 
   const handleClickMenuItem = useCallback(
     async (event: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -87,6 +125,9 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ zodiac }) => {
         case 'copy':
           copyLink();
           break;
+        case 'wall-fast':
+          await postPhotoOnWall(zodiacLocalPhoto[zodiac], UserStore.token);
+          break;
         default:
           break;
       }
@@ -94,11 +135,18 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ zodiac }) => {
     []
   );
 
+  useEffect(() => {
+    (async () => {
+      const platform = await getUserPlatform();
+      setPlatform(platform);
+    })();
+  }, []);
+
   return (
     <Box className={classes.container}>
       <Image
         radius="md"
-        src={zodiacLocalPhoto[zodiac]}
+        src={resultImg}
         alt="horoscope png"
         height={`calc(100vh - 250px)`}
         fit="contain"

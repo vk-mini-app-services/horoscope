@@ -1,38 +1,25 @@
 import { Box, Image, Loader } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
-import { FC, useEffect, useState } from 'react';
-import { addTextInLocalPhotoNew, convertToLocalFile } from '../../utils/files';
+import { FC } from 'react';
+import { useStyles } from './styles';
 
 interface IPhotoResultProps {
-  localLink: string;
-  resultText: string;
+  photo: string;
 }
 
-export const PhotoResult: FC<IPhotoResultProps> = observer(({ localLink, resultText }) => {
-  const [photo, setPhoto] = useState<string>('');
-
-  useEffect(() => {
-    (async () => {
-      const photFile = await convertToLocalFile(localLink);
-      const { base64 } = await addTextInLocalPhotoNew(resultText, photFile, '');
-      setPhoto(base64);
-    })();
-  }, []);
+export const PhotoResult: FC<IPhotoResultProps> = observer(({ photo }) => {
+  const { classes } = useStyles();
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
+    <Box className={classes.container}>
       {photo ? (
-        <Box sx={{ width: '200px', height: '400px' }}>
-          <Image radius="md" src={photo} alt="Результат совместимости" />
-        </Box>
+        <Image
+          radius="md"
+          src={photo}
+          alt="Результат совместимости"
+          height={`calc(100vh - 250px)`}
+          fit="contain"
+        />
       ) : (
         <Loader />
       )}

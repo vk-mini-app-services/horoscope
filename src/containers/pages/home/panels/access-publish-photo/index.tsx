@@ -1,67 +1,50 @@
-import { Box, Button, Image, Text } from '@mantine/core';
+import { Box, Button, Image, LoadingOverlay, Text } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
-import { Dispatch, FC, SetStateAction, useCallback } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useState } from 'react';
 import { useStores } from '../../../../../utils/hooks/useStores';
 import { getUserToken } from '../../../../../utils/vk/bridge-methods';
 import { useStyles } from './styles';
 import scroll from '../../../../../assets/img/scroll.png';
-import defaultResultPhoto from '../../../../../assets/img/access-publish-photo/pic14.png';
+import defaultResultPhoto from '../../../../../assets/img/access-publish-photo/pic15.png';
 import { postPhotoOnWall } from '../../../../../utils/vk/sharing-method';
-import { convertToLocalFileInBlob } from '../../../../../utils/files';
-import aries from '../../../../../assets/img/demonic-horoscope/aries.png';
-import taurus from '../../../../../assets/img/demonic-horoscope/taurus.png';
-import gemini from '../../../../../assets/img/demonic-horoscope/gemini.png';
-import cancer from '../../../../../assets/img/demonic-horoscope/cancer.png';
-import leo from '../../../../../assets/img/demonic-horoscope/leo.png';
-import virgo from '../../../../../assets/img/demonic-horoscope/virgo.png';
-import libra from '../../../../../assets/img/demonic-horoscope/libra.png';
-import scorpio from '../../../../../assets/img/demonic-horoscope/scorpio.png';
-import sagittarius from '../../../../../assets/img/demonic-horoscope/sagittarius.png';
-import capricorn from '../../../../../assets/img/demonic-horoscope/capricorn.png';
-import aquarius from '../../../../../assets/img/demonic-horoscope/aquarius.png';
-import pisces from '../../../../../assets/img/demonic-horoscope/pisces.png';
 import { getZodiacSign } from '../../../../../utils/helpers';
+import { demonicHoroscopeResult } from '../../../../../utils/results-img/demonic-horoscope-result';
 interface IAccessPanelProps {
   setActivePanel: Dispatch<SetStateAction<string>>;
 }
 
-const zodiacLocalPhoto: { [key: string]: string } = {
-  aries: aries,
-  taurus: taurus,
-  gemini: gemini,
-  cancer: cancer,
-  leo: leo,
-  virgo: virgo,
-  libra: libra,
-  scorpio: scorpio,
-  sagittarius: sagittarius,
-  capricorn: capricorn,
-  aquarius: aquarius,
-  pisces: pisces
-};
-
 export const AccessPanel: FC<IAccessPanelProps> = observer(({ setActivePanel }) => {
   const { classes } = useStyles();
   const { UserStore } = useStores();
+  const [visible, setVisible] = useState(false);
 
   const handleAction = useCallback(async (event: React.SyntheticEvent<HTMLButtonElement>) => {
     const value = event.currentTarget.dataset.value;
 
     if (value === 'yes') {
-      const token = await getUserToken('wall,photos');
+      const token = await getUserToken('wall,photos,friends');
 
       if (token && UserStore.userInfo) {
         UserStore.setUserToken(token);
 
-        const currentZodiacByUserBirthDate = await getZodiacSign(UserStore?.userInfo?.bdate ?? '');
+        const userInfo = localStorage.getItem('userInfo');
 
-        // TODO: ЗАменить дефолтное фото.
+        const bDate = userInfo ? JSON.parse(userInfo)?.bdate : UserStore?.userInfo?.bdate;
+
+        const currentZodiacByUserBirthDate = await getZodiacSign(bDate ?? '');
+
         const photo = currentZodiacByUserBirthDate
-          ? zodiacLocalPhoto[currentZodiacByUserBirthDate]
+          ? demonicHoroscopeResult[currentZodiacByUserBirthDate]
           : defaultResultPhoto;
 
-        const blob = await convertToLocalFileInBlob(photo);
-        await postPhotoOnWall(blob, token);
+        setVisible(true);
+
+        try {
+          await postPhotoOnWall(photo, token);
+          setVisible(false);
+        } catch (e) {
+          console.warn('handleAction postPhotoOnWall', e);
+        }
 
         setActivePanel('select');
       }
@@ -72,6 +55,7 @@ export const AccessPanel: FC<IAccessPanelProps> = observer(({ setActivePanel }) 
 
   return (
     <Box className={classes.container}>
+      <LoadingOverlay visible={visible} overlayBlur={2} overlayColor="#0d1116" />
       <Image src={scroll} width={200} height={200} />
 
       <Box sx={{ width: '100%' }}>

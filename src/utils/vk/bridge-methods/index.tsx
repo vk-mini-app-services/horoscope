@@ -6,6 +6,23 @@ import { APP_ID, SHARING_TEXT, URL_PROXY } from '../../constants/app';
 // import sharingMan from '../img/sharingMan.png';
 // import sharingWoman from '../img/sharingWoman.png';
 
+export const getUserPlatform = async () => {
+  let platform = null;
+
+  await bridge
+    .send('VKWebAppGetClientVersion')
+    .then((res) => {
+      if (res.platform) {
+        platform = res.platform;
+      }
+      console.log('VKWebAppGetAuthTokeN RES', res);
+    })
+    .catch((err) => {
+      console.log('VKWebAppGetAuthTokeN ERR', err);
+    });
+
+  return platform;
+};
 // получение токена пользователя
 export const getUserToken = async (scope: string) => {
   let token = '';

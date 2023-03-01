@@ -1,8 +1,10 @@
 import { showNotification } from '@mantine/notifications';
 import bridge from '@vkontakte/vk-bridge';
 import axios from 'axios';
+import { sendRequestWithRetry } from '../../../api/helpers';
 import { APP_URL, NAME_PROJECT, SHARING_TEXT, URL_PROXY } from '../../constants';
-import { addTextInLocalPhotoNew } from '../../files';
+import { addTextInLocalPhotoNew, convertToLocalFileInBlob } from '../../files';
+import { getUserToken } from '../bridge-methods';
 
 // Поделиться ссылкой
 export const shareLink = () => {
@@ -149,7 +151,14 @@ export async function createAndShareStory(
   }
 }
 
-export async function postPhotoOnWall(blob: Blob, ACCESS_TOKEN: string) {
+export async function postPhotoOnWall(linkPhoto: string, ACCESS_TOKEN: string) {
+  const blob = await convertToLocalFileInBlob(linkPhoto);
+  let token = ACCESS_TOKEN;
+
+  if (!token) {
+    token = await getUserToken('wall,photos,friends');
+  }
+
   try {
     const formData = new FormData();
     formData.append('photo', blob, 'photo.png');
@@ -173,28 +182,39 @@ export async function postPhotoOnWall(blob: Blob, ACCESS_TOKEN: string) {
       }
     });
 
-    const { data: result } = await axios({
-      method: 'post',
-      url: `${URL_PROXY}/${uploadUrl.response.upload_url}`,
-      data: formData,
-      headers: { 'Content-Type': 'multipart/form-data' }
-    });
+    try {
+      const config = {
+        method: 'post',
+        url: `${URL_PROXY}/${uploadUrl.response.upload_url}`,
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' }
+      };
 
-    const { response } = await bridge.send('VKWebAppCallAPIMethod', {
-      method: 'photos.save',
-      params: {
-        album_id: albumId.response.id,
-        v: '5.131',
-        access_token: ACCESS_TOKEN,
-        hash: result.hash,
-        photos_list: result.photos_list,
-        server: result.server,
-        caption: SHARING_TEXT
-      }
-    });
+      const { data: result } = await sendRequestWithRetry(10, 1000, config);
 
-    console.log('response', response);
+      await bridge.send('VKWebAppCallAPIMethod', {
+        method: 'photos.save',
+        params: {
+          album_id: albumId.response.id,
+          v: '5.131',
+          access_token: ACCESS_TOKEN,
+          hash: result.hash,
+          photos_list: result.photos_list,
+          server: result.server,
+          caption: SHARING_TEXT
+        }
+      });
+    } catch (error) {
+      console.error('sendRequestWithRetry error', error);
+    }
+    // const { data: result } = await axios({
+    //   method: 'post',
+    //   url: `${URL_PROXY}/${uploadUrl.response.upload_url}`,
+    //   data: formData,
+    //   headers: { 'Content-Type': 'multipart/form-data' },
+    //   timeout: 30_000
+    // });
   } catch (error) {
-    console.log(error);
+    console.log('postPhotoOnWall', error);
   }
 }

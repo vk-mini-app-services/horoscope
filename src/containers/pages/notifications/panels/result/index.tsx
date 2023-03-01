@@ -1,6 +1,6 @@
 import { Box, Button } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
-import { Dispatch, FC, SetStateAction, useCallback } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { DropdownMenu } from '../../../../../components/dropdown-menu';
 import { IListItem, IZodiac } from '../../../../../types';
 import { PagesEnum } from '../../../../../types/enums';
@@ -8,12 +8,16 @@ import {
   copyLink,
   shareWall,
   shareLink,
-  sharingStory
+  sharingStory,
+  postPhotoOnWall
 } from '../../../../../utils/vk/sharing-method';
 import { useStyles } from './styles';
 import zodiacCompatibilityResultPhoto from '../../../../../assets/img/zodiac-compatibility/zodiac-compatibility.png';
 import { PhotoResult } from '../../../../../components/generate-photo';
 import { compatibilityResultLinkForWall } from '../../../../../utils/results-img/compatibility-result';
+import { useStores } from '../../../../../utils/hooks/useStores';
+import { addTextInLocalPhotoNew, convertToLocalFile } from '../../../../../utils/files';
+import desktopZodiacResult from '../../../../../assets/img/zodiac-compatibility/desktop/zodiac-res.png';
 
 const list: IListItem[] = [
   {
@@ -31,6 +35,10 @@ const list: IListItem[] = [
   {
     label: 'Копировать ссылку',
     value: 'copy'
+  },
+  {
+    label: 'Опубликовать на стене',
+    value: 'wall-fast'
   }
 ];
 
@@ -44,6 +52,9 @@ interface IResultPanelProps {
 export const ResultPanel: FC<IResultPanelProps> = observer(
   ({ zodiac, sharingPhotoUrl, zodiacObj }) => {
     const { classes } = useStyles();
+    const { UserStore } = useStores();
+
+    const [photo, setPhoto] = useState<string>('');
 
     const handleClickMenuItem = useCallback(
       async (event: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -62,6 +73,9 @@ export const ResultPanel: FC<IResultPanelProps> = observer(
           case 'copy':
             copyLink();
             break;
+          case 'wall-fast':
+            await postPhotoOnWall(sharingPhotoUrl, UserStore.token);
+            break;
           default:
             break;
         }
@@ -69,12 +83,24 @@ export const ResultPanel: FC<IResultPanelProps> = observer(
       [sharingPhotoUrl]
     );
 
+    useEffect(() => {
+      const resultText = zodiacObj ? zodiacObj[zodiac] : '';
+      (async () => {
+        if (UserStore.platform === 'web') {
+          const photFile = await convertToLocalFile(desktopZodiacResult);
+          const { base64 } = await addTextInLocalPhotoNew(resultText, photFile, '', 700, 400);
+          setPhoto(base64);
+        } else {
+          const photFile = await convertToLocalFile(zodiacCompatibilityResultPhoto);
+          const { base64 } = await addTextInLocalPhotoNew(resultText, photFile, '');
+          setPhoto(base64);
+        }
+      })();
+    }, [UserStore.platform]);
+
     return (
       <Box className={classes.container}>
-        <PhotoResult
-          localLink={zodiacCompatibilityResultPhoto}
-          resultText={zodiacObj ? zodiacObj[zodiac] : ''}
-        />
+        <PhotoResult photo={photo} />
 
         <Box sx={{ width: '100%' }}>
           <DropdownMenu list={list} handleClick={handleClickMenuItem} width="calc(100% - 48px)">

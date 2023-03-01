@@ -133,15 +133,17 @@ export const addTextInLocalPhoto = async (
 export const addTextInLocalPhotoNew = async (
   text: string,
   photo: File,
-  _staticText: string
+  _staticText: string,
+  width?: number,
+  height?: number
 ): Promise<{ file: File; blob: Blob; base64: string }> => {
   try {
     // Наложение текста на картинку
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     const image = await createImageBitmap(photo);
-    canvas.width = image.width;
-    canvas.height = image.height;
+    canvas.width = width ? width : image.width;
+    canvas.height = height ? height : image.height;
 
     if (context) {
       context.drawImage(image, 0, 0);
