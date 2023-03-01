@@ -169,7 +169,7 @@ export async function postPhotoOnWall(linkPhoto: string, ACCESS_TOKEN: string) {
         title: NAME_PROJECT,
         description: SHARING_TEXT,
         v: '5.131',
-        access_token: ACCESS_TOKEN
+        access_token: token
       }
     });
 
@@ -178,7 +178,7 @@ export async function postPhotoOnWall(linkPhoto: string, ACCESS_TOKEN: string) {
       params: {
         album_id: albumId.response.id,
         v: '5.131',
-        access_token: ACCESS_TOKEN
+        access_token: token
       }
     });
 
@@ -197,7 +197,7 @@ export async function postPhotoOnWall(linkPhoto: string, ACCESS_TOKEN: string) {
         params: {
           album_id: albumId.response.id,
           v: '5.131',
-          access_token: ACCESS_TOKEN,
+          access_token: token,
           hash: result.hash,
           photos_list: result.photos_list,
           server: result.server,

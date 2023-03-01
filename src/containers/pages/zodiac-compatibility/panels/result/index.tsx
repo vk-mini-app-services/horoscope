@@ -88,7 +88,7 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ generalZodiac }) =
           break;
       }
     },
-    [sharingPhotoUrl]
+    [sharingPhotoUrl, UserStore.token]
   );
 
   useEffect(() => {
