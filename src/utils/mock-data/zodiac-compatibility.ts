@@ -2,6 +2,18 @@ type ZodiacCompatibility = {
   [key: string]: string;
 };
 
+export const addKeyToValue = (obj: ZodiacCompatibility): ZodiacCompatibility => {
+  const result: ZodiacCompatibility = {};
+
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      result[key] = `(${key.replace('|', ' и ')}) ${obj[key]}`;
+    }
+  }
+
+  return result;
+};
+
 export const omenCompatibility: ZodiacCompatibility = {
   'Овен|Овен':
     '100% - Эта пара имеет сильную связь и может быть очень страстной. Они могут испытывать взаимное уважение и поддержку, но могут также столкнуться с проблемой, когда оба хотят быть лидерами.',
@@ -29,7 +41,7 @@ export const omenCompatibility: ZodiacCompatibility = {
     '50% - Эта пара может иметь много проблем из-за своих разных подходов к жизни. Овен предпочитает действовать, тогда как Рыбы предпочитают мечтать и приспосабливаться. Однако, если они смогут найти общие цели, они могут создать очень красивую и вдохновляющую связь.'
 };
 
-const taurusCompatibility: { [key: string]: string } = {
+export const taurusCompatibility: { [key: string]: string } = {
   'Телец|Овен':
     '40% - Несмотря на противоположность знаков, отношения могут быть довольно страстными, однако вероятны частые конфликты и недопонимание.',
   'Телец|Телец':
@@ -56,7 +68,7 @@ const taurusCompatibility: { [key: string]: string } = {
     '70% Телец и Рыбы вполне могут найти общий язык, но могут недопонимать друг друга в некоторых ситуациях из-за разных восприятий мира и жизни. Однако, если они настроятся на взаимопонимание, то отношения могут быть очень гармоничными и приятными.'
 };
 
-const geminiCompatibility: { [key: string]: string } = {
+export const geminiCompatibility: { [key: string]: string } = {
   'Близнецы|Овен':
     '80% Очень высокий уровень энергии и интеллекта, которые оба знака могут привнести в отношения, могут сделать их очень успешными и продуктивными.',
   'Близнецы|Телец':
@@ -83,7 +95,7 @@ const geminiCompatibility: { [key: string]: string } = {
     '45% - Низкая совместимость, Близнецы и Рыбы имеют слишком разные характеры и взгляды на жизнь, чтобы найти общий язык и увлечься друг другом'
 };
 
-const cancerCompatibility: Record<string, string> = {
+export const cancerCompatibility: Record<string, string> = {
   'Рак|Овен':
     '30% Эта связь может быть достаточно сложной, так как эмоциональная природа Рака может вызвать конфликты с безудержным Овном.',
   'Рак|Телец':
@@ -110,7 +122,7 @@ const cancerCompatibility: Record<string, string> = {
     '90% Рак и Рыбы образуют красивую и чувственную связь, основанную на взаимопонимании и сопереживании друг другу.'
 };
 
-const leoCompatibility: { [key: string]: string } = {
+export const leoCompatibility: { [key: string]: string } = {
   'Лев|Овен':
     '100% – Львы и Овны – оба очень уверены в себе и энергичны, что делает их отличными партнерами.',
   'Лев|Телец':
@@ -137,7 +149,7 @@ const leoCompatibility: { [key: string]: string } = {
     '70% – Львы и Рыбиаки могут дополнять друг друга, но могут иметь различия в отношении к жизни.'
 };
 
-const virgoCompatibility: { [key: string]: string } = {
+export const virgoCompatibility: { [key: string]: string } = {
   'Дева|Овен':
     '40% – Овны могут быть слишком эгоистичными и не в состоянии удовлетворить потребности Девы.',
   'Дева|Телец':
@@ -164,7 +176,7 @@ const virgoCompatibility: { [key: string]: string } = {
     '50% – Девы и Рыбы могут иметь проблемы в отношениях, так как Рыбы слишком эмоциональны и могут не понимать практичности и реализм Дев.'
 };
 
-const libraCompatibility: { [key: string]: string } = {
+export const libraCompatibility: { [key: string]: string } = {
   'Весы|Овен':
     '60% – Весы и Овны могут иметь проблемы из-за разных темпераментов, но если они находят общий язык, то могут создать прочную связь.',
   'Весы|Телец':
@@ -190,7 +202,7 @@ const libraCompatibility: { [key: string]: string } = {
     '100% – Весы и Весы - отличная пара, так как они понимают друг друга, имеют схожие взгляды на жизнь и делят общие интересы. Они оба обладают изысканным вкусом и любят красоту, что делает их идеальными партнерами.'
 };
 
-const scorpioCompatibility: { [key: string]: string } = {
+export const scorpioCompatibility: { [key: string]: string } = {
   'Скорпион|Овен':
     '40% – Скорпионы и Овны могут иметь много проблем из-за своего различного подхода к жизни.',
   'Скорпион|Телец':
@@ -216,7 +228,7 @@ const scorpioCompatibility: { [key: string]: string } = {
     '70% – Так как Скорпионы обладают схожими чертами характера, у них может возникать конкуренция и борьба за лидерство, но при хорошем взаимопонимании они могут образовать очень сильную связь'
 };
 
-const sagittariusCompatibility: { [key: string]: string } = {
+export const sagittariusCompatibility: { [key: string]: string } = {
   'Стрелец|Овен':
     '80% – Стрелец и Овен оба обладают страстью к жизни, что делает их привлекательной парой.',
   'Стрелец|Телец':
@@ -243,7 +255,7 @@ const sagittariusCompatibility: { [key: string]: string } = {
     '90% – Стрелецы и Рыбы оба обладают хорошим вкусом и чувством прекрасного, что делает их отличными партнерами.'
 };
 
-const capricornCompatibility: { [key: string]: string } = {
+export const capricornCompatibility: { [key: string]: string } = {
   'Козерог|Овен':
     '40% – Козероги и Овны могут иметь проблемы из-за своих разных характеров, но если они находят общий язык, то могут создать прочную связь.',
   'Козерог|Телец':
@@ -270,7 +282,7 @@ const capricornCompatibility: { [key: string]: string } = {
     '60% – Козероги и Весы имеют некоторые различия в своих подходах к жизни, но если они найдут общий язык, то смогут добиться многого вместе. Имея общие интересы и ценности, они могут стать отличной командой и поддерживать друг друга в достижении своих целей.'
 };
 
-const aquariusCompatibility: { [key: string]: string } = {
+export const aquariusCompatibility: { [key: string]: string } = {
   'Водолей|Овен':
     '70% – Водолеи и Овны могут создать увлекательное партнерство, так как оба обладают страстью и энергией.',
   'Водолей|Телец':
@@ -297,7 +309,7 @@ const aquariusCompatibility: { [key: string]: string } = {
     '50% – Знаки Водолей и Весы относятся к воздушным знакам Зодиака, и у них есть некоторые общие черты, которые делают их совместимыми друг с другом. Они могут найти общие интересы и наслаждаться интеллектуальными дискуссиями, что делает их идеальными партнерами.'
 };
 
-const piscesCompatibility: { [key: string]: string } = {
+export const piscesCompatibility: { [key: string]: string } = {
   'Рыбы|Овен':
     '50% – Рыбы и Овны могут иметь противоречия в отношениях, так как их подход к жизни и ценности могут сильно различаться.',
   'Рыбы|Телец':
@@ -338,3 +350,5 @@ export const zodiacCompatibility = {
   ...aquariusCompatibility,
   ...piscesCompatibility
 };
+
+export const _zodiacCompatibility: ZodiacCompatibility = addKeyToValue(zodiacCompatibility);

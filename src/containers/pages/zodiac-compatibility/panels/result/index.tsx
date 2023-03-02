@@ -5,7 +5,7 @@ import { DropdownMenu } from '../../../../../components/dropdown-menu';
 
 import { IListItem } from '../../../../../types';
 import { PagesEnum } from '../../../../../types/enums';
-import { zodiacCompatibility } from '../../../../../utils/mock-data/zodiac-compatibility';
+import { _zodiacCompatibility } from '../../../../../utils/mock-data/zodiac-compatibility';
 import {
   copyLink,
   shareWall,
@@ -95,7 +95,7 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ generalZodiac }) =
     (async () => {
       const photFile = await convertToLocalFile(zodiacCompatibilityResultPhoto);
       const { file } = await addTextInLocalPhotoNew(
-        zodiacCompatibility[generalZodiac],
+        _zodiacCompatibility[generalZodiac],
         photFile,
         'Переходи по ссылке в приложение'
       );
@@ -111,7 +111,7 @@ export const ResultPanel: FC<IResultPanelProps> = observer(({ generalZodiac }) =
   }, []);
 
   useEffect(() => {
-    const resultText = zodiacCompatibility[generalZodiac];
+    const resultText = _zodiacCompatibility[generalZodiac];
     (async () => {
       if (UserStore.platform === 'web') {
         const photFile = await convertToLocalFile(desktopZodiacResult);
