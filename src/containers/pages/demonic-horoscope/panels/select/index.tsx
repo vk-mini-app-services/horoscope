@@ -66,7 +66,7 @@ export const SelectPanel: FC<ISelectPanelProps> = observer(
           radius={8}
           disabled={!zodiac}
         >
-          Узнать совместимость
+          Узнать результат
         </Button>
       </Box>
     );

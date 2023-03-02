@@ -78,7 +78,7 @@ export const SelectPanel: FC<ISelectPanelProps> = observer(
           disabled={!zodiacMan || !zodiacWoman}
           sx={{ fontWeight: 500 }}
         >
-          Узнать совместимость
+          Узнать результат
         </Button>
       </Box>
     );
