@@ -152,7 +152,7 @@ export const addTextInLocalPhotoNew = async (
       context.textBaseline = 'middle';
       context.textAlign = 'left';
 
-      const maxWidth = canvas.width - 80; // Учитываем отступы справа и слева
+      const maxWidth = canvas.width - 40; // Учитываем отступы справа и слева 80
       const lineHeight = 30;
       const maxHeight = canvas.height - 20; // Учитываем отступы сверху и снизу
       const maxLines = Math.floor(maxHeight / lineHeight);
