@@ -22,8 +22,8 @@ export const SelectPanel: FC<ISelectPanelProps> = observer(
     const { UserStore } = useStores();
 
     const goPanel = async () => {
-      await subscriptionById(UserStore?.groups?.subGroup, UserStore?.groups?.mailGroup);
       setActivePanel('result');
+      await subscriptionById(UserStore?.groups?.subGroup, UserStore?.groups?.mailGroup);
     };
 
     const handleChangeZodiac = (value: string) => {
