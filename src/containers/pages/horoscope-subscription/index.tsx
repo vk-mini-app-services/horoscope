@@ -1,45 +1,48 @@
 import { Box, Button, Text, Image } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { addUserInSubscription } from '../../../api';
 import noty from '../../../assets/img/noty.png';
-import { Modal } from '../../../components/modal';
+// import { Modal } from '../../../components/modal';
 import { NAME_PROJECT, USER_ID } from '../../../utils/constants';
 import { useAds } from '../../../utils/hooks/useAds';
+import { appAllowNotifications } from '../../../utils/vk/bridge-methods';
 import { Layout } from '../../layout';
 import { useStyles } from './styles';
 
 export const HoroscopeSubscription = observer(() => {
   const { classes } = useStyles();
 
-  const [opened, setOpened] = useState(false);
+  // const [opened, setOpened] = useState(false);
 
   useAds();
 
   const handleClick = async () => {
-    const { data } = await addUserInSubscription({
-      appName: NAME_PROJECT,
-      userId: USER_ID
-    });
+    const res = await appAllowNotifications();
 
-    if (data && data?.success) {
-      showNotification({
-        title: `Вы успешно добавлены в рассылку!`,
-        message: '',
-        autoClose: 5_000,
-        color: 'green'
+    if (res) {
+      const { data } = await addUserInSubscription({
+        appName: NAME_PROJECT,
+        userId: USER_ID
       });
-    } else {
-      showNotification({
-        title: `Ошибка!`,
-        message: data?.message,
-        autoClose: 10_000,
-        color: 'red'
-      });
+
+      if (data && data?.success) {
+        showNotification({
+          title: `Вы успешно добавлены в рассылку!`,
+          message: '',
+          autoClose: 5_000,
+          color: 'green'
+        });
+      } else {
+        showNotification({
+          title: `Ошибка!`,
+          message: data?.message,
+          autoClose: 10_000,
+          color: 'red'
+        });
+      }
     }
-
-    setOpened(false);
   };
 
   return (
@@ -63,18 +66,18 @@ export const HoroscopeSubscription = observer(() => {
 Один раз в день утром, мы будем отправлять 
 Вам гороскоп по Вашему знаку зодиака.`}
         </Text>
-        <Button onClick={() => setOpened(true)} color="button.0" fullWidth sx={{ fontWeight: 500 }}>
+        <Button onClick={handleClick} color="button.0" fullWidth sx={{ fontWeight: 500 }}>
           Включить уведомления
         </Button>
       </Box>
 
-      <Modal
+      {/* <Modal
         setOpened={setOpened}
         opened={opened}
         title="Подписка на уведомления"
         buttonText="Включить уведомления"
         onClickButton={handleClick}
-      />
+      /> */}
     </Layout>
   );
 });

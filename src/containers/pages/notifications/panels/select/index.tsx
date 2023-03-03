@@ -47,8 +47,6 @@ export const SelectPanel: FC<ISelectPanelProps> = observer(
         try {
           const { data } = await getHoroscopeToday();
 
-          console.log('data getHoroscopeToday', data);
-
           if (data) {
             if (data.success) {
               setZodiacObj(data.message);

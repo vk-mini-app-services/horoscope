@@ -173,3 +173,20 @@ export const subscriptionById = async (subGroup?: number, mailGroup?: number) =>
     await subscribeMessageFromGroup(mailGroup);
   }
 };
+
+export const appAllowNotifications = async () => {
+  let appNotyRes = false;
+  await bridge
+    .send('VKWebAppAllowNotifications', {})
+    .then((res) => {
+      if (res.result) {
+        appNotyRes = true;
+      }
+      console.log('VKWebAppAllowNotifications RES', res);
+    })
+    .catch((err) => {
+      console.log('VKWebAppAllowNotifications ERR', err);
+    });
+
+  return appNotyRes;
+};
