@@ -1,5 +1,6 @@
-import { Box, Button } from '@mantine/core';
+import { Box, Button, Text } from '@mantine/core';
 import { useCallback, useState } from 'react';
+import { NAME_PROJECT } from '../../../utils/constants/app';
 import { Layout } from '../../layout';
 import { GetAllHoroscopePanel } from './panels/get-all-horoscope';
 import { SetHoroscopePanel } from './panels/set-horoscope';
@@ -18,6 +19,11 @@ export const Admin = () => {
   return (
     <Layout prevPage="home">
       <Box className={classes.root}>
+        <Box className={classes.container}>
+          <Text mt={8} color="white">
+            Название приложения: {NAME_PROJECT}
+          </Text>
+        </Box>
         <Box className={classes.container}>
           <Button
             data-value="get-all-horoscope"
